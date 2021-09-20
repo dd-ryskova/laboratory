@@ -7,5 +7,4 @@ public class IdentityFunction implements MathFunction {
     }
 }
 
-// оставил комментарий))
-// Девочки, привет
+// оставлю вам тут комментарий))
