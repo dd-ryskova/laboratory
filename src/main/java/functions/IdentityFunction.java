@@ -6,3 +6,6 @@ public class IdentityFunction implements MathFunction {
         return x;
     }
 }
+
+// оставил комментарий))
+// Девочки, привет
