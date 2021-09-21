@@ -1,5 +1,6 @@
 package functions;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -18,5 +19,10 @@ public class ConstantFunctionTest {
         assertEquals(new ConstantFunction(30.0).apply(0.0),30.0);
         assertEquals(new ConstantFunction(20.0).apply(30.0),20.0);
 
+    }
+
+    @AfterMethod
+    void afterMethod() {
+        System.out.println("ConstantFunction checked");
     }
 }

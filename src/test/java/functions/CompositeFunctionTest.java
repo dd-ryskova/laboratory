@@ -27,7 +27,11 @@ public class CompositeFunctionTest {
         assertEquals(arcSelf.apply(0), 0, border);
         assertEquals(arcSelfFour.apply(Math.sqrt(3)/3),Math.pow(Math.PI/6,4), border);
 
+    }
 
+    @AfterMethod
+    void afterMethod() {
+        System.out.println("CompositeFunction checked");
     }
 }
 
