@@ -6,3 +6,4 @@ public class ArctanFunction implements MathFunction {
         return Math.atan(x);
     }
 }
+
