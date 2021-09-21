@@ -1,7 +1,6 @@
 package functions;
 
 public class ConstantFunction implements MathFunction {
-
     private final double num;
 
     public ConstantFunction (double num){

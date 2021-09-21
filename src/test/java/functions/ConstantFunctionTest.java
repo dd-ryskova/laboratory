@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ConstantFunctionTest {
-
     @Test
     public void testGetNum() {
         assertEquals(new ConstantFunction(0.0).getNum(),0.0);
