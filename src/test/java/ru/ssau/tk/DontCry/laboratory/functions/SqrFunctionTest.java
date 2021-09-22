@@ -10,8 +10,7 @@ public class SqrFunctionTest {
     private final static double DELTA = 0.0001;
 
     @Test
-    void TestApply() {
-
+    public void testApply() {
         assertEquals(new SqrFunction().apply(3.), 9., DELTA);
         assertEquals(new SqrFunction().apply(2.), 4., DELTA);
         assertEquals(new SqrFunction().apply(6.), 36., DELTA);
