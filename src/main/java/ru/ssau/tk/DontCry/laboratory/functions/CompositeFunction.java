@@ -12,6 +12,6 @@ public class CompositeFunction implements MathFunction {
 
     @Override
     public double apply(double x) {
-        return secondFunction.apply(firstFunction.apply(x)); //firstFunction - внутрення, secondFunction - внешняя
+        return secondFunction.apply(firstFunction.apply(x));
     }
 }
