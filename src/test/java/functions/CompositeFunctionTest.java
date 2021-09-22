@@ -10,7 +10,7 @@ public class CompositeFunctionTest {
 
     @Test
     public void testApply() {
-        double border = 0.0001;
+        final double DELTA = 0.0001;
 
         MathFunction sqr = new SqrFunction();
         MathFunction self = new IdentityFunction();
@@ -22,10 +22,10 @@ public class CompositeFunctionTest {
         MathFunction arcSelf = new CompositeFunction(arctg, self);
         MathFunction arcSelfFour = new CompositeFunction(arcSelf, four);
 
-        assertEquals(selfArc.apply(1), Math.PI / 4,  border); //трейтий параметр отвечает за ограничения знаков после запятой
-        assertEquals(sqrArc.apply(Math.sqrt(3)), 1.2490, border);
-        assertEquals(arcSelf.apply(0), 0, border);
-        assertEquals(arcSelfFour.apply(Math.sqrt(3)/3),Math.pow(Math.PI/6,4), border);
+        assertEquals(selfArc.apply(1), Math.PI / 4,  DELTA);
+        assertEquals(sqrArc.apply(Math.sqrt(3)), 1.2490, DELTA);
+        assertEquals(arcSelf.apply(0), 0, DELTA);
+        assertEquals(arcSelfFour.apply(Math.sqrt(3)/3),Math.pow(Math.PI/6,4), DELTA);
 
     }
 

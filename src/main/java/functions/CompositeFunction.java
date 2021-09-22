@@ -1,7 +1,8 @@
 package functions;
 
 public class CompositeFunction implements MathFunction {
-    private MathFunction firstFunction, secondFunction;
+    private MathFunction firstFunction;
+    private MathFunction secondFunction;
 
     public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {
         this.firstFunction = firstFunction;
@@ -10,6 +11,6 @@ public class CompositeFunction implements MathFunction {
 
     @Override
     public double apply(double x) {
-        return secondFunction.apply(firstFunction.apply(x)); //firstFunction - внутрення, secondFunction - внешняя
+        return secondFunction.apply(firstFunction.apply(x));
     }
 }
