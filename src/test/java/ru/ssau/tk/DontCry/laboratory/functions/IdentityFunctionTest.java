@@ -15,7 +15,6 @@ public class IdentityFunctionTest {
         assertEquals(new IdentityFunction().apply(25.), 25., DELTA);
         assertEquals(new IdentityFunction().apply(456.), 456., DELTA);
     }
-
     @AfterMethod
     void afterMethod() {
         System.out.println("IdentityFunction checked");

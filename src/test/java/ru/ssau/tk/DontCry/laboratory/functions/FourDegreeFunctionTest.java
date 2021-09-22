@@ -15,7 +15,6 @@ public class FourDegreeFunctionTest {
         assertEquals(new FourDegreeFunction().apply(3.), 81., DELTA);
         assertEquals(new FourDegreeFunction().apply(4.), 256., DELTA);
     }
-
     @AfterMethod
     void afterMethod() {
         System.out.println("FourDegreeFunction checked");

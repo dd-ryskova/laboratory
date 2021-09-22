@@ -13,7 +13,6 @@ public class CompositeFunctionTest {
     private final MathFunction self = new IdentityFunction();
     private final MathFunction arctg = new ArctanFunction();
     private final MathFunction four = new FourDegreeFunction();
-
     private final MathFunction selfArc = new CompositeFunction(self, arctg);
     private final MathFunction sqrArc = new CompositeFunction(sqr, arctg);
     private final MathFunction arcSelf = new CompositeFunction(arctg, self);

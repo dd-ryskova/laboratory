@@ -16,7 +16,6 @@ public class SqrFunctionTest {
         assertEquals(new SqrFunction().apply(2.), 4., DELTA);
         assertEquals(new SqrFunction().apply(6.), 36., DELTA);
     }
-
     @AfterMethod
     void afterMethod() {
         System.out.println("SqrFunction checked");

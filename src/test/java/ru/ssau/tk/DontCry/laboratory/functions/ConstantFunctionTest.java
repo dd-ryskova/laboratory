@@ -15,7 +15,6 @@ public class ConstantFunctionTest {
         assertEquals(new ConstantFunction(Double.NEGATIVE_INFINITY).getNum(), Double.NEGATIVE_INFINITY, DELTA);
         assertEquals(new ConstantFunction(-1.0).getNum(), -1.0, DELTA);
     }
-
     @Test
     public void testApply() {
         assertEquals(new ConstantFunction(1.0).apply(5.0), 1.0, DELTA);

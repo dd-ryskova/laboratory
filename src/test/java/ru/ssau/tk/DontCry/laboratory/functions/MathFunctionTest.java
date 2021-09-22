@@ -15,7 +15,6 @@ public class MathFunctionTest {
     private final MathFunction four = new FourDegreeFunction();
     private final MathFunction function1 = (sqr).andThen(sqr).andThen(x);
     private final MathFunction function2 = (four).andThen(sqr).andThen(sqr).andThen(x);
-
     @Test
     public void testAndThen() {
         assertNotEquals(function1.apply(1000.0), 100.0, DELTA);
