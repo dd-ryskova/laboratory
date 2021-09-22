@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ArctanFunctionTest {
-
     @Test
     public void testApply() {
         assertEquals(new ArctanFunction().apply(1), Math.PI / 4);

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class MathFunctionTest {
+    private final double DELTA = 0.0001;
 
     private final MathFunction x = new IdentityFunction();
     private final MathFunction sqr = new SqrFunction();
@@ -16,10 +17,10 @@ public class MathFunctionTest {
 
     @Test
     public void testAndThen() {
-        assertNotEquals(function1.apply(1000.0), 100.0);
-        assertEquals(function1.andThen(one).apply(0.0), 1.0);
-        assertEquals(function1.apply(10.0), 10000.0);
-        assertEquals(function2.apply(2.0), 65536.0);
+        assertNotEquals(function1.apply(1000.0), 100.0, DELTA);
+        assertEquals(function1.andThen(one).apply(0.0), 1.0, DELTA);
+        assertEquals(function1.apply(10.0), 10000.0, DELTA);
+        assertEquals(function2.apply(2.0), 65536.0, DELTA);
     }
 
     @AfterMethod
