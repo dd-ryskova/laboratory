@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
     private final double DELTA = 0.0001;
+
     @Test
     void apply() {
         assertEquals(new SqrFunction().apply(3.), 9.,DELTA);

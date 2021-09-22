@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 
 public class FourDegreeFunctionTest {
     private final double DELTA = 0.0001;
+
     @Test
     void apply() {
         assertEquals(new FourDegreeFunction().apply(2.), 16.,DELTA);

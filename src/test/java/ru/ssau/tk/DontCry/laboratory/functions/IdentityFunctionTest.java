@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 
 public class IdentityFunctionTest {
     private final double DELTA = 0.0001;
+
     @Test
     public void testApply() {
         assertEquals(new IdentityFunction().apply(3.), 3., DELTA);

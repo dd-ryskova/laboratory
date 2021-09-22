@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 
 public class ConstantFunctionTest {
     private final double DELTA = 0.0001;
+
     @Test
     public void testGetNum() {
         assertEquals(new ConstantFunction(0.0).getNum(), 0.0, DELTA);

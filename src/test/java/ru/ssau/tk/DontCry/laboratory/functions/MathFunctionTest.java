@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 
 public class MathFunctionTest {
     private final double DELTA = 0.0001;
+
     private final MathFunction x = new IdentityFunction();
     private final MathFunction sqr = new SqrFunction();
     private final MathFunction one = new UnitFunction();
