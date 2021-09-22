@@ -15,6 +15,7 @@ public class ZeroFunctionTest {
         assertEquals(new ZeroFunction().apply(90.0), 0.0, DELTA);
         assertEquals(new ZeroFunction().apply(667.0), 0.0, DELTA);
     }
+
     @AfterMethod
     void afterMethod() {
         System.out.println("ZeroFunction checked");

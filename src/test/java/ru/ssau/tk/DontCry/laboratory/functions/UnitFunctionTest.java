@@ -15,6 +15,7 @@ public class UnitFunctionTest {
         assertEquals(new UnitFunction().apply(10.0), 1.0, DELTA);
         assertEquals(new UnitFunction().apply(9.0), 1.0, DELTA);
     }
+
     @AfterMethod
     void afterMethod() {
         System.out.println("UnitFunction checked");
