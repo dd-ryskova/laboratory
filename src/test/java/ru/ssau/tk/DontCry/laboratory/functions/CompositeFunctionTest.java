@@ -7,25 +7,24 @@ import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
 
+    private final double DELTA = 0.0001;
+
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction self = new IdentityFunction();
+    private final MathFunction arctg = new ArctanFunction();
+    private final MathFunction four = new FourDegreeFunction();
+
+    private final MathFunction selfArc = new CompositeFunction(self, arctg);
+    private final MathFunction sqrArc = new CompositeFunction(sqr, arctg);
+    private final MathFunction arcSelf = new CompositeFunction(arctg, self);
+    private final MathFunction arcSelfFour = new CompositeFunction(arcSelf, four);
+
     @Test
     public void testApply() {
-        final double DELTA = 0.0001;
-
-        MathFunction sqr = new SqrFunction();
-        MathFunction self = new IdentityFunction();
-        MathFunction arctg = new ArctanFunction();
-        MathFunction four = new FourDegreeFunction();
-
-        MathFunction selfArc = new CompositeFunction(self, arctg);
-        MathFunction sqrArc = new CompositeFunction(sqr, arctg);
-        MathFunction arcSelf = new CompositeFunction(arctg, self);
-        MathFunction arcSelfFour = new CompositeFunction(arcSelf, four);
-
         assertEquals(selfArc.apply(1), Math.PI / 4, DELTA);
         assertEquals(sqrArc.apply(Math.sqrt(3)), 1.2490, DELTA);
         assertEquals(arcSelf.apply(0), 0, DELTA);
-        assertEquals(arcSelfFour.apply(Math.sqrt(3) / 3), Math.pow(Math.PI / 6, 4),DELTA);
-
+        assertEquals(arcSelfFour.apply(Math.sqrt(3) / 3), Math.pow(Math.PI / 6, 4), DELTA);
     }
 
     @AfterMethod

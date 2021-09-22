@@ -19,7 +19,6 @@ public class ConstantFunctionTest {
         assertEquals(new ConstantFunction(1.0).apply(5.0), 1.0);
         assertEquals(new ConstantFunction(30.0).apply(0.0), 30.0);
         assertEquals(new ConstantFunction(20.0).apply(30.0), 20.0);
-
     }
 
     @AfterMethod

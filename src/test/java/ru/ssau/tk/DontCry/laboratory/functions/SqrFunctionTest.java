@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 public class SqrFunctionTest {
 
     @Test
-    void apply() {
+    void TestApply() {
         assertEquals(new SqrFunction().apply(3.), 9.);
         assertEquals(new SqrFunction().apply(2.), 4.);
         assertEquals(new SqrFunction().apply(6.), 36.);

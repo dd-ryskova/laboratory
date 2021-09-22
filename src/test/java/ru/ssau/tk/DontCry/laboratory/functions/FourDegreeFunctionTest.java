@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 public class FourDegreeFunctionTest {
 
     @Test
-    void apply() {
+    void TestApply() {
         assertEquals(new FourDegreeFunction().apply(2.), 16.);
         assertEquals(new FourDegreeFunction().apply(3.), 81.);
         assertEquals(new FourDegreeFunction().apply(4.), 256.);
