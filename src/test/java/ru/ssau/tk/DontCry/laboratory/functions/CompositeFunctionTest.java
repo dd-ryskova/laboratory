@@ -7,6 +7,8 @@ import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
 
+    private final static double DELTA = 0.0001;
+
     private final MathFunction sqr = new SqrFunction();
     private final MathFunction self = new IdentityFunction();
     private final MathFunction arctg = new ArctanFunction();
@@ -19,7 +21,6 @@ public class CompositeFunctionTest {
 
     @Test
     public void testApply() {
-        double DELTA = 0.0001;
         assertEquals(selfArc.apply(1), Math.PI / 4, DELTA);
         assertEquals(sqrArc.apply(Math.sqrt(3)), 1.2490, DELTA);
         assertEquals(arcSelf.apply(0), 0, DELTA);

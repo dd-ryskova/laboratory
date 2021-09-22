@@ -7,9 +7,10 @@ import static org.testng.Assert.*;
 
 public class ZeroFunctionTest {
 
+    private final static double DELTA = 0.0001;
+
     @Test
     public void testApply() {
-        double DELTA = 0.0001;
         assertEquals(new ZeroFunction().apply(100.0), 0.0, DELTA);
         assertEquals(new ZeroFunction().apply(90.0), 0.0, DELTA);
         assertEquals(new ZeroFunction().apply(667.0), 0.0, DELTA);

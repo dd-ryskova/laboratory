@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 
 public class ConstantFunctionTest {
 
-    private final double DELTA = 0.0001;
+    private final static double DELTA = 0.0001;
 
     @Test
     public void testGetNum() {
