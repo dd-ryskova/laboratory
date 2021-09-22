@@ -1,7 +1,9 @@
-package functions;
+package ru.ssau.tk.DontCry.laboratory.functions;
 
 public class CompositeFunction implements MathFunction {
-    private MathFunction firstFunction, secondFunction;
+
+    private final MathFunction firstFunction;
+    private final MathFunction secondFunction;
 
     public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {
         this.firstFunction = firstFunction;

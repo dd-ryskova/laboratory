@@ -1,4 +1,4 @@
-package functions;
+package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class UnitFunctionTest {
+
     @Test
     public void testApply() {
         assertEquals(new UnitFunction().apply(100.0), 1.0);

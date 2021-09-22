@@ -1,4 +1,4 @@
-package functions;
+package ru.ssau.tk.DontCry.laboratory.functions;
 
 public class ZeroFunction extends ConstantFunction {
 
