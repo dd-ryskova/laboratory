@@ -6,12 +6,13 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
-    private final double DELTA = 0.0001;
+
     @Test
     void TestApply() {
+        double DELTA = 0.0001;
         assertEquals(new SqrFunction().apply(3.), 9., DELTA);
-        assertEquals(new SqrFunction().apply(2.), 4.,DELTA);
-        assertEquals(new SqrFunction().apply(6.), 36.,DELTA);
+        assertEquals(new SqrFunction().apply(2.), 4., DELTA);
+        assertEquals(new SqrFunction().apply(6.), 36., DELTA);
     }
 
     @AfterMethod
