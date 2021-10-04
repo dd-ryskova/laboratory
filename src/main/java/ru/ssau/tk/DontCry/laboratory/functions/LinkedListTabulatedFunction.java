@@ -73,7 +73,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     return indexNode;
                 } else {
                     indexNode = indexNode.next;
-                    return indexNode;
                 }
             }
         } else {
@@ -83,7 +82,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     return indexNode;
                 } else {
                     indexNode = indexNode.prev;
-                    return indexNode;
                 }
             }
         }
