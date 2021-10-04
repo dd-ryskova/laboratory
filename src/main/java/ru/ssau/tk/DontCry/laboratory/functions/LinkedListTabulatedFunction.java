@@ -6,7 +6,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count = 0;
 
     protected static class Node {
-        private static final long serialVersionUID = 7508846417220233246L;
+
         public double x;
         public double y;
         public Node next;
@@ -73,6 +73,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     return indexNode;
                 } else {
                     indexNode = indexNode.next;
+                    return indexNode;
                 }
             }
         } else {
@@ -82,57 +83,85 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     return indexNode;
                 } else {
                     indexNode = indexNode.prev;
+                    return indexNode;
                 }
             }
         }
-        return indexNode;
+        return null;
     }
-
-    @Override
-    protected int floorIndexOfX(double x) {
-        return 0;
-    }
-
-    @Override
-    protected double extrapolateLeft(double x) {
-        return 0;
-    }
-
-    @Override
-    protected double extrapolateRight(double x) {
-        return 0;
-    }
-
-    @Override
-    protected double interpolate(double x, int floorIndex) {
-        return 0;
-    }
-
 
     @Override
     public double getX(int index) {
-        return 0;
+        return getNode(index).x;
     }
 
     @Override
     public double getY(int index) {
-        return 0;
+        return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
-
+        getNode(index).y = value;
     }
 
     @Override
     public int indexOfX(double x) {
-        return 0;
+        Node indexNode = head;
+        for (int i = 0; i < count; i++) {
+            if (indexNode.x == x) {
+                return i;
+            } else {
+                indexNode = indexNode.next;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int indexOfY(double y) {
-        return 0;
+        Node indexNode = head;
+        for (int i = 0; i < count; i++) {
+            if (indexNode.y == y) {
+                return i;
+            } else {
+                indexNode = indexNode.next;
+            }
+        }
+        return -1;
     }
 
+    @Override
+    protected int floorIndexOfX(double x) {
+        Node indexNode = head;
+        for (int i = 0; i < count; i++) {
+            if (indexNode.x < x) {
+                indexNode = indexNode.next;
+            } else {
+                return i - 1;
+            }
+        }
+        return getCount();
+    }
 
+    @Override
+    protected double extrapolateLeft(double x) {
+        return interpolate(x, head.x, head.next.x, head.y, head.next.y);
+    }
+
+    @Override
+    protected double extrapolateRight(double x) {
+        return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
+    }
+
+    @Override
+    protected double interpolate(double x, int floorIndex) {
+        if (head.x == head.prev.x) {
+            return head.y;
+        } else {
+            Node leftNode = getNode(floorIndex);
+            Node rightNode = leftNode.next;
+            return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
+        }
+    }
 }
