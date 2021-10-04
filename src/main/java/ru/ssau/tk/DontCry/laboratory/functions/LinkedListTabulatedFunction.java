@@ -66,9 +66,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node getNode(int index) {
         Node indexNode = new Node();
-        if (index < count / 2) {
+        if (index < count / 2.) {
             indexNode = head;
-            for (int i = 0; i <= count / 2; i++) {
+            for (int i = 0; i <= count / 2.; i++) {
                 if (i == index) {
                     return indexNode;
                 } else {
@@ -77,7 +77,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             }
         } else {
             indexNode = head.prev;
-            for (int i = count; i >= count / 2; i--) {
+            for (int i = count-1; i >= count / 2.; i--) {
                 if (i == index) {
                     return indexNode;
                 } else {
