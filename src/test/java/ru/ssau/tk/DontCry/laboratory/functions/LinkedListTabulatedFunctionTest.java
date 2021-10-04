@@ -106,8 +106,8 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
         LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
 
-        assertEquals(array.indexOfX(7.0), 3,  DELTA);
-        assertEquals(firstListOfFunction.indexOfX(-45.), 0,  DELTA);
+        assertEquals(array.indexOfX(7.0), 3, DELTA);
+        assertEquals(firstListOfFunction.indexOfX(-45.), 0, DELTA);
         assertEquals(secondListOfFunction.indexOfX(3.), 2, DELTA);
         assertEquals(secondListOfFunction.indexOfX(17.), -1, DELTA);
     }
@@ -118,8 +118,8 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
         LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
 
-        assertEquals(array.indexOfY(8.0), 3,  DELTA);
-        assertEquals(firstListOfFunction.indexOfY(2025.), 0,  DELTA);
+        assertEquals(array.indexOfY(8.0), 3, DELTA);
+        assertEquals(firstListOfFunction.indexOfY(2025.), 0, DELTA);
         assertEquals(secondListOfFunction.indexOfY(9.), 2, DELTA);
         assertEquals(secondListOfFunction.indexOfY(334.), -1, DELTA);
     }
@@ -127,7 +127,15 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testFloorIndexOfX() {
         LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
+        LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
+
+        assertEquals(array.floorIndexOfX(10.0), 5, DELTA);
+        assertEquals(array.floorIndexOfX(0.0), 0, DELTA);
+        assertEquals(array.floorIndexOfX(5.5), 2, DELTA);
+
+        assertEquals(secondListOfFunction.floorIndexOfX(-23), 0, DELTA);
+        assertEquals(secondListOfFunction.floorIndexOfX(4.2), 3, DELTA);
+        assertEquals(secondListOfFunction.floorIndexOfX(67.8), 10, DELTA);
     }
 
     @Test
