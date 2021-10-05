@@ -39,6 +39,14 @@ public class LinkedListTabulatedFunctionTest {
         return new LinkedListTabulatedFunction(selfSqr, 1, 10, 10);
     }
 
+    private LinkedListTabulatedFunction createSqrFunction() {
+        return new LinkedListTabulatedFunction(sqr, 1, 10, 10);
+    }
+
+    private LinkedListTabulatedFunction createIdentityFunction() {
+        return new LinkedListTabulatedFunction(self, -10, -1, 10);
+    }
+
     @Test
     public void testAddNode() {
         LinkedListTabulatedFunction array = createFromArray();
@@ -205,6 +213,22 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(compositeFunction.indexOfY(25.0), 4, DELTA);
         assertEquals(compositeFunction.floorIndexOfX(7.3), 6, DELTA);
         assertEquals(compositeFunction.interpolate(4.2, 3), 17.8, DELTA);
+    }
+
+
+    @Test
+    public void testCompositeFunctionFromFunction() {
+        MathFunction firstListOfFunction = createIdentityFunction();
+        MathFunction secondListOfFunction = createSqrFunction();
+
+        assertEquals(firstListOfFunction.andThen(secondListOfFunction).apply(5.), 25, DELTA);
+        assertEquals(firstListOfFunction.andThen(firstListOfFunction).apply(5.), 5, DELTA);
+        assertEquals(firstListOfFunction.andThen(firstListOfFunction).apply(-13.), -13, DELTA);
+        assertEquals(firstListOfFunction.andThen(secondListOfFunction).apply(11.2), 122.7999, DELTA);
+    }
+
+    @Test
+    public void testCompositeFunctionFromArray() {
     }
 
     @AfterMethod
