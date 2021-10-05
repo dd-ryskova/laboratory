@@ -18,6 +18,10 @@ public class LinkedListTabulatedFunctionTest {
 
     private final MathFunction firstFunction = new SqrFunction();
     private final MathFunction secondFunction = new ZeroFunction();
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction self = new IdentityFunction();
+    private final MathFunction selfSqr = new CompositeFunction(sqr, self);
+
 
     private LinkedListTabulatedFunction createFirstFunction() {
         return new LinkedListTabulatedFunction(firstFunction, -45, -10, 10);
@@ -29,6 +33,10 @@ public class LinkedListTabulatedFunctionTest {
 
     private LinkedListTabulatedFunction createThirdFunction() {
         return new LinkedListTabulatedFunction(secondFunction, 5, 15, 10);
+    }
+
+    private LinkedListTabulatedFunction createCompositeFunction() {
+        return new LinkedListTabulatedFunction(selfSqr, 1, 10, 10);
     }
 
     @Test
@@ -177,6 +185,26 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(array.interpolate(4.0, 2), 5.0);
         assertEquals(thirdListOfFunction.interpolate(5.5, thirdListOfFunction.floorIndexOfX(5.5)), 0, DELTA);
         assertEquals(secondListOfFunction.interpolate(4.2, 3), 17.8, DELTA);
+    }
+
+
+    @Test
+    public void testCompositeFunction() {
+        LinkedListTabulatedFunction compositeFunction = createCompositeFunction();
+        compositeFunction.addNode(11, 144);
+        compositeFunction.setY(10, 145);
+
+        assertEquals(compositeFunction.rightBound(), 11.0, DELTA);
+        assertEquals(compositeFunction.leftBound(), 1.0, DELTA);
+        assertEquals(compositeFunction.getCount(), 11.0, DELTA);
+        assertEquals(compositeFunction.getX(2), 3.0, DELTA);
+        assertEquals(compositeFunction.getY(4), 25.0, DELTA);
+        compositeFunction.setY(10, 145);
+        assertEquals(compositeFunction.getY(10), 145, DELTA);
+        assertEquals(compositeFunction.indexOfX(5.0), 4, DELTA);
+        assertEquals(compositeFunction.indexOfY(25.0), 4, DELTA);
+        assertEquals(compositeFunction.floorIndexOfX(7.3), 6, DELTA);
+        assertEquals(compositeFunction.interpolate(4.2, 3), 17.8, DELTA);
     }
 
     @AfterMethod
