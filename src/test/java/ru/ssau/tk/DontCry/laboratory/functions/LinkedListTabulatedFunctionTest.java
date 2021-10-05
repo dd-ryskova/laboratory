@@ -17,6 +17,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     private final MathFunction firstFunction = new SqrFunction();
+    private final MathFunction secondFunction = new ZeroFunction();
 
     private LinkedListTabulatedFunction createFirstFunction() {
         return new LinkedListTabulatedFunction(firstFunction, -45, -10, 10);
@@ -26,12 +27,19 @@ public class LinkedListTabulatedFunctionTest {
         return new LinkedListTabulatedFunction(firstFunction, 1, 10, 10);
     }
 
+    private LinkedListTabulatedFunction createThirdFunction() {
+        return new LinkedListTabulatedFunction(secondFunction, 5, 15, 10);
+    }
+
     @Test
     public void testAddNode() {
         LinkedListTabulatedFunction array = createFromArray();
         array.addNode(11, 12);
+        LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
+        secondListOfFunction.addNode(11, 121);
 
         assertEquals(array.rightBound(), 11.0, DELTA);
+        assertEquals(secondListOfFunction.rightBound(), 11, DELTA);
     }
 
     @Test
@@ -72,13 +80,13 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(firstListOfFunction.getX(0), -45.0, DELTA);
         assertEquals(firstListOfFunction.getX(2), -37.2222, DELTA);
         assertEquals(firstListOfFunction.getX(9), -10.0, DELTA);
-
     }
 
     @Test
     public void testGetY() {
         LinkedListTabulatedFunction array = createFromArray();
         LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
+        LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
 
         assertEquals(array.getY(1), 4., DELTA);
         assertEquals(array.getY(2), 6., DELTA);
@@ -87,6 +95,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(firstListOfFunction.getY(0), 2025.0, DELTA);
         assertEquals(firstListOfFunction.getY(2), 1385.4938, DELTA);
         assertEquals(firstListOfFunction.getY(9), 100.0, DELTA);
+        assertEquals(secondListOfFunction.getY(2), 9.0, DELTA);
     }
 
     @Test
@@ -141,19 +150,33 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testExtrapolateLeft() {
         LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
+        LinkedListTabulatedFunction thirdListOfFunction = createThirdFunction();
+
+        assertEquals(array.extrapolateLeft(0.0), 1.0, DELTA);
+        assertEquals(array.extrapolateLeft(-54.0), -53.0, DELTA);
+        assertEquals(thirdListOfFunction.extrapolateLeft(2.0), 0.0, DELTA);
+        assertEquals(thirdListOfFunction.extrapolateLeft(-15567.0), 0.0, DELTA);
     }
 
     @Test
     public void testExtrapolateRight() {
         LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
+        LinkedListTabulatedFunction thirdListOfFunction = createThirdFunction();
+
+        assertEquals(array.extrapolateRight(10.0), 11.0);
+        assertEquals(array.extrapolateRight(134.0), 135.0);
+        assertEquals(thirdListOfFunction.extrapolateLeft(554.4366), 0.0, DELTA);
     }
 
     @Test
     public void testInterpolate() {
         LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstListOfFunction = createFirstFunction();
+        LinkedListTabulatedFunction thirdListOfFunction = createThirdFunction();
+        LinkedListTabulatedFunction secondListOfFunction = createSecondFunction();
+
+        assertEquals(array.interpolate(4.0, 2), 5.0);
+        assertEquals(thirdListOfFunction.interpolate(5.5, thirdListOfFunction.floorIndexOfX(5.5)), 0, DELTA);
+        assertEquals(secondListOfFunction.interpolate(4.2, 3), 17.8, DELTA);
     }
 
     @AfterMethod
