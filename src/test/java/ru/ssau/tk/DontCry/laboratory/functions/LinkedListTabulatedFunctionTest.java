@@ -229,6 +229,23 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testCompositeFunctionFromArray() {
+        LinkedListTabulatedFunction array = createFromArray();
+        LinkedListTabulatedFunction firstListOfFunction = createSqrFunction();
+        LinkedListTabulatedFunction secondListOfFunction = createIdentityFunction();
+
+        assertEquals(firstListOfFunction.apply(4), 16, DELTA);
+        assertEquals(firstListOfFunction.apply(1.5), 2.5, DELTA);
+        assertEquals(firstListOfFunction.apply(10), 100, DELTA);
+
+        assertEquals(secondListOfFunction.apply(-10), -10, DELTA);
+        assertEquals(secondListOfFunction.apply(2.5), 2.5, DELTA);
+        assertEquals(secondListOfFunction.apply(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY, DELTA);
+
+        assertEquals(array.apply(1), 2, DELTA);
+        assertEquals(array.apply(-5), -4, DELTA);
+        assertEquals(array.apply(3.5), 4.5, DELTA);
+
+
     }
 
     @AfterMethod
