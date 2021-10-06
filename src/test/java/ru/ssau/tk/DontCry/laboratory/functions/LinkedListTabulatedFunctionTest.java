@@ -226,7 +226,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void testCompositeFunctionFromArray() {
+    public void testTabulatedFunctionFromArray() {
         LinkedListTabulatedFunction array = createFromArray();
         LinkedListTabulatedFunction firstListOfFunction = createSqrFunction();
         LinkedListTabulatedFunction secondListOfFunction = createIdentityFunction();
