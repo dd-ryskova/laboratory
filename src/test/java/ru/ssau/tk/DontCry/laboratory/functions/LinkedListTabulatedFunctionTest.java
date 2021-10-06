@@ -235,7 +235,7 @@ public class LinkedListTabulatedFunctionTest {
 
         assertEquals(firstListOfFunction.apply(4), 16, DELTA);
         assertEquals(firstListOfFunction.apply(1.5), 2.5, DELTA);
-        assertEquals(firstListOfFunction.apply(10), 100, DELTA);
+        assertEquals(firstListOfFunction.apply(8), 64, DELTA);
 
         assertEquals(secondListOfFunction.apply(-10), -10, DELTA);
         assertEquals(secondListOfFunction.apply(2.5), 2.5, DELTA);
