@@ -12,27 +12,25 @@ public class LinkedListTabulatedFunctionTest {
     private final double[] xValues = new double[]{1, 3, 5, 7, 9};
     private final double[] yValues = new double[]{2, 4, 6, 8, 10};
 
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction zero = new ZeroFunction();
+    private final MathFunction self = new IdentityFunction();
+    private final MathFunction selfSqr = new CompositeFunction(sqr, self);
+
     private LinkedListTabulatedFunction createFromArray() {
         return new LinkedListTabulatedFunction(xValues, yValues);
     }
 
-    private final MathFunction firstFunction = new SqrFunction();
-    private final MathFunction secondFunction = new ZeroFunction();
-    private final MathFunction sqr = new SqrFunction();
-    private final MathFunction self = new IdentityFunction();
-    private final MathFunction selfSqr = new CompositeFunction(sqr, self);
-
-
     private LinkedListTabulatedFunction createFirstFunction() {
-        return new LinkedListTabulatedFunction(firstFunction, -45, -10, 10);
+        return new LinkedListTabulatedFunction(sqr, -45, -10, 10);
     }
 
     private LinkedListTabulatedFunction createSecondFunction() {
-        return new LinkedListTabulatedFunction(firstFunction, 1, 10, 10);
+        return new LinkedListTabulatedFunction(sqr, 1, 10, 10);
     }
 
     private LinkedListTabulatedFunction createThirdFunction() {
-        return new LinkedListTabulatedFunction(secondFunction, 5, 15, 10);
+        return new LinkedListTabulatedFunction(zero, 5, 15, 10);
     }
 
     private LinkedListTabulatedFunction createCompositeFunction() {
@@ -244,8 +242,6 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(array.apply(1), 2, DELTA);
         assertEquals(array.apply(-5), -4, DELTA);
         assertEquals(array.apply(3.5), 4.5, DELTA);
-
-
     }
 
     @AfterMethod
