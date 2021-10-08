@@ -5,32 +5,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
     private int count = 0;
 
-    protected static class Node {
-
-        public double x;
-        public double y;
-        public Node next;
-        public Node prev;
-    }
-
-    public void addNode(double x, double y) {
-        Node newNode = new Node();
-        newNode.x = x;
-        newNode.y = y;
-        if (head == null) {
-            head = newNode;
-            newNode.prev = newNode;
-            newNode.next = newNode;
-        } else {
-            Node last = head.prev;
-            newNode.prev = last;
-            newNode.next = head;
-            last.next = newNode;
-        }
-        head.prev = newNode;
-        count++;
-    }
-
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
@@ -49,19 +23,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
     }
 
-    @Override
-    public int getCount() {
-        return this.count;
-    }
-
-    @Override
-    public double leftBound() {
-        return head.x;
-    }
-
-    @Override
-    public double rightBound() {
-        return head.prev.x;
+    public void addNode(double x, double y) {
+        Node newNode = new Node();
+        newNode.x = x;
+        newNode.y = y;
+        if (head == null) {
+            head = newNode;
+            newNode.prev = newNode;
+            newNode.next = newNode;
+        } else {
+            Node last = head.prev;
+            newNode.prev = last;
+            newNode.next = head;
+            last.next = newNode;
+        }
+        head.prev = newNode;
+        count++;
     }
 
     private Node getNode(int index) {
@@ -86,6 +63,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getCount() {
+        return this.count;
+    }
+
+    @Override
+    public double leftBound() {
+        return head.x;
+    }
+
+    @Override
+    public double rightBound() {
+        return head.prev.x;
     }
 
     @Override
