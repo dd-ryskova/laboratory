@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] xValues;
     private final double[] yValues;
-    private int count;
+    private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         this.xValues = Arrays.copyOf(xValues, xValues.length);
@@ -21,6 +21,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             xValues[i] = xFrom + i * step;
             yValues[i] = source.apply(xFrom + i * step);
         }
+        this.count = count;
     }
 
     @Override
@@ -74,7 +75,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected int floorIndexOfX(double x) {
+    public int floorIndexOfX(double x) {
         for (int i = 0; i + 1 < count; i++) {
             if (xValues[i + 1] > x) {
                 return i;

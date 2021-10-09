@@ -2,7 +2,7 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
-    protected abstract int floorIndexOfX(double x);
+    public abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
 
