@@ -85,7 +85,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double extrapolateLeft(double x) {
+    public double extrapolateLeft(double x) {
         if (this.count == 1) {
             return this.yValues[0];
         }
@@ -93,7 +93,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double extrapolateRight(double x) {
+    public double extrapolateRight(double x) {
         if (count == 1) {
             return yValues[0];
         }
@@ -101,7 +101,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double interpolate(double x, int floorIndex) {
+    public double interpolate(double x, int floorIndex) {
         if (count == 1) {
             return yValues[0];
         }

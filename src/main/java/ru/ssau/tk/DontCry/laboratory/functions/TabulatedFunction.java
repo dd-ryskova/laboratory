@@ -18,4 +18,7 @@ public interface TabulatedFunction extends MathFunction {
 
     double rightBound();
     int floorIndexOfX(double x);
+
+    double extrapolateLeft(double x);
+    double extrapolateRight(double x);
 }
