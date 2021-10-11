@@ -122,7 +122,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected int floorIndexOfX(double x) {
+    public int floorIndexOfX(double x) {
         Node indexNode = head;
         for (int i = 0; i < count; i++) {
             if (indexNode.x < x) {
@@ -138,7 +138,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double extrapolateLeft(double x) {
+    public double extrapolateLeft(double x) {
         if (head.x == head.prev.x) {
             return head.y;
         }
@@ -146,7 +146,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double extrapolateRight(double x) {
+    public double extrapolateRight(double x) {
         if (head.x == head.prev.x) {
             return head.y;
         }
@@ -154,7 +154,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected double interpolate(double x, int floorIndex) {
+    public double interpolate(double x, int floorIndex) {
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
         if (head.x == head.prev.x) {
