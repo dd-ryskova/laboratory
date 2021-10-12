@@ -27,7 +27,7 @@ public class ArrayTabulatedFunctionTest {
         return new ArrayTabulatedFunction(zero, 2, 4, 2);
     }
 
-    private TabulatedFunction createForthFunction() {
+    private TabulatedFunction createFourthFunction() {
         return new ArrayTabulatedFunction(self, 1, 2, 3);
     }
 
@@ -37,9 +37,9 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testGetCount() {
-
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
+
         assertEquals(firstFunction.getCount(), 5);
         assertEquals(secondFunction.getCount(), 4);
     }
@@ -51,7 +51,6 @@ public class ArrayTabulatedFunctionTest {
 
         assertEquals(firstFunction.getX(2), 2.5, DELTA);
         assertEquals(firstFunction.getX(3), 3.25, DELTA);
-
         assertEquals(secondFunction.getX(0), 1, DELTA);
         assertEquals(secondFunction.getX(2), 5., DELTA);
     }
@@ -172,22 +171,22 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testCompositeFunction() {
         TabulatedFunction thirdFunction = createThirdFunction();
-        TabulatedFunction forthFunction = createForthFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
         TabulatedFunction fifthFunction = createFifthFunction();
 
-        assertEquals(forthFunction.andThen(thirdFunction).apply(1.), 0., DELTA);
-        assertEquals(forthFunction.andThen(fifthFunction).apply(4.), 11., DELTA);
-        assertEquals(thirdFunction.andThen(forthFunction).apply(-12), 0., DELTA);
+        assertEquals(fourthFunction.andThen(thirdFunction).apply(1.), 0., DELTA);
+        assertEquals(fourthFunction.andThen(fifthFunction).apply(4.), 11., DELTA);
+        assertEquals(thirdFunction.andThen(fourthFunction).apply(-12), 0., DELTA);
         assertEquals(thirdFunction.andThen(fifthFunction).apply(154.), 3., DELTA);
         assertEquals(fifthFunction.andThen(thirdFunction).apply(-3.), 0., DELTA);
-        assertEquals(fifthFunction.andThen(forthFunction).apply(11.), 25., DELTA);
-        assertEquals(fifthFunction.andThen(forthFunction).andThen(thirdFunction).apply(-2.5), 0., DELTA);
-        assertEquals(fifthFunction.andThen(thirdFunction).andThen(forthFunction).apply(7), 0., DELTA);
-        assertEquals(thirdFunction.andThen(forthFunction).andThen(fifthFunction).apply(9), 3., DELTA);
-        assertEquals(thirdFunction.andThen(fifthFunction).andThen(forthFunction).apply(-3.9), 3., DELTA);
-        assertEquals(forthFunction.andThen(fifthFunction).andThen(thirdFunction).apply(100.), 0., DELTA);
+        assertEquals(fifthFunction.andThen(fourthFunction).apply(11.), 25., DELTA);
+        assertEquals(fifthFunction.andThen(fourthFunction).andThen(thirdFunction).apply(-2.5), 0., DELTA);
+        assertEquals(fifthFunction.andThen(thirdFunction).andThen(fourthFunction).apply(7), 0., DELTA);
+        assertEquals(thirdFunction.andThen(fourthFunction).andThen(fifthFunction).apply(9), 3., DELTA);
+        assertEquals(thirdFunction.andThen(fifthFunction).andThen(fourthFunction).apply(-3.9), 3., DELTA);
+        assertEquals(fourthFunction.andThen(fifthFunction).andThen(thirdFunction).apply(100.), 0., DELTA);
         assertEquals(fifthFunction.andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
-        assertEquals(fifthFunction.andThen(forthFunction).andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
+        assertEquals(fifthFunction.andThen(fourthFunction).andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
     }
 
     @AfterMethod
