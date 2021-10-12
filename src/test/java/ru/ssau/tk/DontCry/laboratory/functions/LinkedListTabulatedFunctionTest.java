@@ -41,6 +41,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testAddNode() {
         LinkedListTabulatedFunction array = createFromArray();
         array.addNode(11, 12);
+
         LinkedListTabulatedFunction secondFunction = createSecondFunction();
         secondFunction.addNode(11, 121);
 
