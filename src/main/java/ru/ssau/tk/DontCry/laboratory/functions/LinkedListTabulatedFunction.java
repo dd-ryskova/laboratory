@@ -163,4 +163,5 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
         }
     }
+
 }

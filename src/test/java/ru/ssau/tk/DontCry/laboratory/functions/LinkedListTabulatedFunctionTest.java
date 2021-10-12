@@ -17,32 +17,32 @@ public class LinkedListTabulatedFunctionTest {
     private final MathFunction self = new IdentityFunction();
     private final MathFunction linear = new LinearFunction();
 
-    private LinkedListTabulatedFunction createFromArray() {
+    private TabulatedFunction createFromArray() {
         return new LinkedListTabulatedFunction(xValues, yValues);
     }
 
-    private LinkedListTabulatedFunction createFirstFunction() {
+    private TabulatedFunction createFirstFunction() {
         return new LinkedListTabulatedFunction(sqr, 1, 10, 10);
     }
 
-    private LinkedListTabulatedFunction createSecondFunction() {
+    private TabulatedFunction createSecondFunction() {
         return new LinkedListTabulatedFunction(zero, -50, 0, 21);
     }
 
-    private LinkedListTabulatedFunction createThirdFunction() {
+    private TabulatedFunction createThirdFunction() {
         return new LinkedListTabulatedFunction(self, -5.4, 5.4, 100);
     }
 
-    private LinkedListTabulatedFunction createFourthFunction() {
+    private TabulatedFunction createFourthFunction() {
         return new LinkedListTabulatedFunction(linear, -12, 12, 25);
     }
 
     @Test
     public void testAddNode() {
-        LinkedListTabulatedFunction array = createFromArray();
+        TabulatedFunction array = createFromArray();
         array.addNode(11, 12);
 
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
         secondFunction.addNode(11, 121);
 
         assertEquals(array.rightBound(), 11.0, DELTA);
@@ -51,11 +51,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testGetCount() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.getCount(), 5);
         assertEquals(firstFunction.getCount(), 10);
@@ -66,11 +66,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testLeftBound() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.leftBound(), 1., DELTA);
         assertEquals(firstFunction.leftBound(), 1., DELTA);
@@ -81,11 +81,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.rightBound(), 9., DELTA);
         assertEquals(firstFunction.rightBound(), 10., DELTA);
@@ -96,9 +96,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testGetX() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
 
         assertEquals(array.getX(1), 3., DELTA);
         assertEquals(array.getX(2), 5., DELTA);
@@ -111,10 +111,10 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testGetY() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
 
         assertEquals(array.getY(1), 4., DELTA);
         assertEquals(array.getY(2), 6., DELTA);
@@ -127,9 +127,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
         array.setY(2, 4);
         firstFunction.setY(0, -19);
         thirdFunction.setY(3, 2342.232);
@@ -141,9 +141,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testIndexOfX() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
 
         assertEquals(array.indexOfX(7.0), 3, DELTA);
         assertEquals(firstFunction.indexOfX(-345.4), -1, DELTA);
@@ -153,11 +153,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testIndexOfY() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
 
         assertEquals(array.indexOfY(8.0), 3, DELTA);
@@ -170,9 +170,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testFloorIndexOfX() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.floorIndexOfX(10.0), 5, DELTA);
         assertEquals(array.floorIndexOfX(0.0), 0, DELTA);
@@ -184,11 +184,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateLeft() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.extrapolateLeft(0.0), 1.0, DELTA);
         assertEquals(array.extrapolateLeft(-54.0), -53.0, DELTA);
@@ -200,11 +200,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateRight() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.extrapolateRight(10.0), 11.0);
         assertEquals(array.extrapolateRight(134.0), 135.0);
@@ -216,11 +216,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testInterpolate() {
-        LinkedListTabulatedFunction array = createFromArray();
-        LinkedListTabulatedFunction firstFunction = createFirstFunction();
-        LinkedListTabulatedFunction secondFunction = createSecondFunction();
-        LinkedListTabulatedFunction thirdFunction = createThirdFunction();
-        LinkedListTabulatedFunction fourthFunction = createFourthFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.interpolate(4.0, 2), 5.0);
         assertEquals(firstFunction.interpolate(5.5, 4), 30.5, DELTA);
