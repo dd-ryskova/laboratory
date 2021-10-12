@@ -6,18 +6,33 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
-    private static final double DELTA = 0.001;
+    private static final double DELTA = 0.01;
     private final double[] xValues = new double[]{1., 3.5, 5., 7};
     private final double[] yValues = new double[]{2., 4., 6.9, 8.};
 
-    MathFunction sqrFunction = new SqrFunction();
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction zero = new ZeroFunction();
+    private final MathFunction self = new IdentityFunction();
+    private final MathFunction linear = new LinearFunction();
 
     private TabulatedFunction createFirstFunction() {
-        return new ArrayTabulatedFunction(sqrFunction, 1, 4, 5);
+        return new ArrayTabulatedFunction(sqr, 1, 4, 5);
     }
 
     private TabulatedFunction createSecondFunction() {
         return new ArrayTabulatedFunction(xValues, yValues);
+    }
+
+    private TabulatedFunction createThirdFunction() {
+        return new ArrayTabulatedFunction(zero, 2, 4, 2);
+    }
+
+    private TabulatedFunction createForthFunction() {
+        return new ArrayTabulatedFunction(self, 1, 2, 3);
+    }
+
+    private TabulatedFunction createFifthFunction() {
+        return new ArrayTabulatedFunction(linear, 1, 4, 5);
     }
 
     @Test
@@ -126,36 +141,57 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(firstFunction.extrapolateLeft(5.),12., DELTA);
-        assertEquals(firstFunction.extrapolateLeft(8.),20.25, DELTA);
-        assertEquals(secondFunction.extrapolateLeft(5.),5.2, DELTA);
-        assertEquals(secondFunction.extrapolateLeft(8.),7.6, DELTA);
+        assertEquals(firstFunction.extrapolateLeft(5.), 12., DELTA);
+        assertEquals(firstFunction.extrapolateLeft(8.), 20.25, DELTA);
+        assertEquals(secondFunction.extrapolateLeft(5.), 5.2, DELTA);
+        assertEquals(secondFunction.extrapolateLeft(8.), 7.6, DELTA);
     }
 
     @Test
-    public void testExtrapolateRight(){
+    public void testExtrapolateRight() {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(firstFunction.extrapolateRight(5.),23.25, DELTA);
-        assertEquals(firstFunction.extrapolateRight(8.),45., DELTA);
-        assertEquals(secondFunction.extrapolateRight(5.),6.9, DELTA);
-        assertEquals(secondFunction.extrapolateRight(8.),8.55, DELTA);
+        assertEquals(firstFunction.extrapolateRight(5.), 23.25, DELTA);
+        assertEquals(firstFunction.extrapolateRight(8.), 45., DELTA);
+        assertEquals(secondFunction.extrapolateRight(5.), 6.9, DELTA);
+        assertEquals(secondFunction.extrapolateRight(8.), 8.55, DELTA);
     }
 
     @Test
-    public void testInterpolate(){
+    public void testInterpolate() {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(firstFunction.interpolate(2., 1),4.125, DELTA);
-        assertEquals(firstFunction.interpolate(8.,2),37.875, DELTA);
-        assertEquals(secondFunction.interpolate(5.,2),6.9, DELTA);
-        assertEquals(secondFunction.interpolate(8.,1),12.7, DELTA);
+        assertEquals(firstFunction.interpolate(2., 1), 4.125, DELTA);
+        assertEquals(firstFunction.interpolate(8., 2), 37.875, DELTA);
+        assertEquals(secondFunction.interpolate(5., 2), 6.9, DELTA);
+        assertEquals(secondFunction.interpolate(8., 1), 12.7, DELTA);
+    }
+
+    @Test
+    public void testCompositeFunction() {
+        TabulatedFunction thirdFunction = createThirdFunction();
+        TabulatedFunction forthFunction = createForthFunction();
+        TabulatedFunction fifthFunction = createFifthFunction();
+
+        assertEquals(forthFunction.andThen(thirdFunction).apply(1.), 0., DELTA);
+        assertEquals(forthFunction.andThen(fifthFunction).apply(4.), 11., DELTA);
+        assertEquals(thirdFunction.andThen(forthFunction).apply(-12), 0., DELTA);
+        assertEquals(thirdFunction.andThen(fifthFunction).apply(154.), 3., DELTA);
+        assertEquals(fifthFunction.andThen(thirdFunction).apply(-3.), 0., DELTA);
+        assertEquals(fifthFunction.andThen(forthFunction).apply(11.), 25., DELTA);
+        assertEquals(fifthFunction.andThen(forthFunction).andThen(thirdFunction).apply(-2.5), 0., DELTA);
+        assertEquals(fifthFunction.andThen(thirdFunction).andThen(forthFunction).apply(7), 0., DELTA);
+        assertEquals(thirdFunction.andThen(forthFunction).andThen(fifthFunction).apply(9), 3., DELTA);
+        assertEquals(thirdFunction.andThen(fifthFunction).andThen(forthFunction).apply(-3.9), 3., DELTA);
+        assertEquals(forthFunction.andThen(fifthFunction).andThen(thirdFunction).apply(100.), 0., DELTA);
+        assertEquals(fifthFunction.andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
+        assertEquals(fifthFunction.andThen(forthFunction).andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
     }
 
     @AfterMethod
     void afterMethod() {
-        System.out.println("LinkedListTabulatedFunctionTest checked");
+        System.out.println("ArrayTabulatedFunctionTest checked");
     }
 }
