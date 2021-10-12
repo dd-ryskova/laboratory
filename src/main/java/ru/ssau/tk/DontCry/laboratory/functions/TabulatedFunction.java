@@ -26,4 +26,5 @@ public interface TabulatedFunction extends MathFunction {
 
     double interpolate(double x, int floorIndex);
 
+    void addNode(double x, double y);
 }
