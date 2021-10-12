@@ -4,6 +4,6 @@ public class LinearFunction implements MathFunction {
 
     @Override
     public double apply(double x) {
-        return 2*x+3;
+        return 2 * x + 3;
     }
 }
