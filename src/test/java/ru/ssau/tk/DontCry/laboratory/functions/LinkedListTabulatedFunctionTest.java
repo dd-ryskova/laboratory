@@ -247,6 +247,17 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(fourthFunction.andThen(thirdFunction).andThen(fourthFunction).andThen(firstFunction).apply(-12.3), -122.6, DELTA);
     }
 
+    @Test
+    public void testApply() {
+        LinkedListTabulatedFunction array = (LinkedListTabulatedFunction) createFromArray();
+        LinkedListTabulatedFunction firstFunction = (LinkedListTabulatedFunction) createFirstFunction();
+
+        assertEquals(array.apply(-0.5), 0.5);
+        assertEquals(array.apply(2.4), 3.4, DELTA);
+        assertEquals(firstFunction.apply(-1.1), -5.3, DELTA);
+        assertEquals(firstFunction.apply(8.3), 69.1, DELTA);
+    }
+
     @AfterMethod
     void afterMethod() {
         System.out.println("LinkedListTabulatedFunctionTest checked");
