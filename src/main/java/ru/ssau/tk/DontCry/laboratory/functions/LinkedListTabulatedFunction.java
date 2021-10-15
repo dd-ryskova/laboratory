@@ -13,20 +13,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        for (int i = 0; i < xValues.length; i++) {
-            this.addNode(xValues[i], yValues[i]);
+        if (xValues.length < 2 || yValues.length < 2) {
+            throw new IllegalArgumentException("Длина массива меньше минимальной!");
+        } else {
+            for (int i = 0; i < xValues.length; i++) {
+                this.addNode(xValues[i], yValues[i]);
+            }
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double step = (xTo - xFrom) / (count - 1);
-        if (xFrom < xTo) {
+        if (xFrom >= xTo) {
+            throw new IllegalArgumentException("Неправильные значения входных параметров!");
+        } else {
+            double step = (xTo - xFrom) / (count - 1);
             for (int i = 0; i < count; i++) {
                 addNode(xFrom, source.apply(xFrom));
                 xFrom += step;
             }
-        } else {
-            System.out.println("Неправильные значения входных параметров.");
         }
     }
 
@@ -89,12 +93,20 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        return getNode(index).x;
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Некорректный индекс!");
+        } else {
+            return getNode(index).x;
+        }
     }
 
     @Override
     public double getY(int index) {
-        return getNode(index).y;
+        if (index < 0 | index >= count) {
+            throw new IllegalArgumentException("Некорректный индекс!");
+        } else {
+            return getNode(index).y;
+        }
     }
 
     @Override
@@ -130,18 +142,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
-        Node indexNode = head;
-        for (int i = 0; i < count; i++) {
-            if (indexNode.x < x) {
-                indexNode = indexNode.next;
-            } else {
-                if (i == 0) {
-                    return 0;
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("Х меньше левой границы!");
+        } else {
+            Node indexNode = head;
+            for (int i = 0; i < count; i++) {
+                if (indexNode.x < x) {
+                    indexNode = indexNode.next;
+                } else {
+                    if (i == 0) {
+                        return 0;
+                    }
+                    return i - 1;
                 }
-                return i - 1;
             }
+            return getCount();
         }
-        return getCount();
     }
 
     @Override

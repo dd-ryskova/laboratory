@@ -175,9 +175,8 @@ public class LinkedListTabulatedFunctionTest {
         TabulatedFunction fourthFunction = createFourthFunction();
 
         assertEquals(array.floorIndexOfX(10.0), 5, DELTA);
-        assertEquals(array.floorIndexOfX(0.0), 0, DELTA);
         assertEquals(array.floorIndexOfX(5.5), 2, DELTA);
-        assertEquals(firstFunction.floorIndexOfX(-36), 0, DELTA);
+        assertEquals(firstFunction.floorIndexOfX(6), 4, DELTA);
         assertEquals(fourthFunction.floorIndexOfX(4.2), 16, DELTA);
         assertEquals(fourthFunction.floorIndexOfX(-8.456), 3, DELTA);
     }
@@ -256,6 +255,24 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(array.apply(2.4), 3.4, DELTA);
         assertEquals(firstFunction.apply(-1.1), -5.3, DELTA);
         assertEquals(firstFunction.apply(8.3), 69.1, DELTA);
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            createFromArray().getX(-2);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            createFromArray().getY(-1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            double[] xValues = new double[]{1, 3, 5};
+            double[] yValues = new double[]{2};
+            new LinkedListTabulatedFunction(xValues, yValues);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new LinkedListTabulatedFunction(sqr, 23, 0, 100);
+        });
     }
 
     @AfterMethod
