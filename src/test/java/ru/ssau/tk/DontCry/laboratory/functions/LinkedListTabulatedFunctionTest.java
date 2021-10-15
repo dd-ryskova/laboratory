@@ -39,10 +39,10 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testAddNode() {
-        TabulatedFunction array = createFromArray();
+        LinkedListTabulatedFunction array = (LinkedListTabulatedFunction) createFromArray();
         array.addNode(11, 12);
 
-        TabulatedFunction secondFunction = createSecondFunction();
+        LinkedListTabulatedFunction secondFunction = (LinkedListTabulatedFunction) createSecondFunction();
         secondFunction.addNode(11, 121);
 
         assertEquals(array.rightBound(), 11.0, DELTA);
