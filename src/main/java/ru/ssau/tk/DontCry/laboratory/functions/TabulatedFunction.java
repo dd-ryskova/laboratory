@@ -1,6 +1,6 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
-public interface TabulatedFunction extends MathFunction {
+public interface TabulatedFunction extends MathFunction, Iterable<Point> {
 
     int getCount();
 
