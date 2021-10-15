@@ -48,11 +48,11 @@ public class CompositeFunctionTest {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(arrayListSqrFunction.apply(5), 121, DELTA);
+        assertEquals(arrayListSqrFunction.apply(5.0), 121, DELTA);
         assertEquals(arrayListSqrFunction.apply(1.5), 56.25, DELTA);
         assertEquals(arrayListSqrFunction.apply(3.5), 90.25, DELTA);
-        assertEquals(sqr.andThen(firstFunction).andThen(secondFunction).apply(2), 35, DELTA);
-        assertEquals(sqr.andThen(secondFunction).andThen(firstFunction).apply(4),369.5,DELTA);
+        assertEquals(sqr.andThen(firstFunction).andThen(secondFunction).apply(2.0), 35, DELTA);
+        assertEquals(sqr.andThen(secondFunction).andThen(firstFunction).apply(4.0), 369.5, DELTA);
     }
 
     @AfterMethod

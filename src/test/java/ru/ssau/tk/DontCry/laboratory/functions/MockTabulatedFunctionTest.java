@@ -13,6 +13,7 @@ public class MockTabulatedFunctionTest {
 
     @Test
     public void testInterpolate() {
+        assertEquals(function.interpolate(0.7, function.getX(0), function.getX(1), function.getY(0), function.getY(1)), 2.4823, DELTA);
         assertEquals(function.interpolate(2.5, 0.5, 3.5, 1.0, 2.0), 1.6666, DELTA);
         assertEquals(function.interpolate(3.6, -2.4, 4.2, -1.1, 5.7), 5.0818, DELTA);
         assertEquals(function.interpolate(-1.4, -3.7, 7.6, -5.9, 8.6), -2.9486, DELTA);
