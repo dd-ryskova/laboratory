@@ -3,6 +3,9 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -259,20 +262,42 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            createFromArray().getX(-2);
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            createFromArray().getY(-1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> createFromArray().getX(-2));
+        assertThrows(IllegalArgumentException.class, () -> createFromArray().getY(-1));
         assertThrows(IllegalArgumentException.class, () -> {
             double[] xValues = new double[]{1, 3, 5};
             double[] yValues = new double[]{2};
             new LinkedListTabulatedFunction(xValues, yValues);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
-            new LinkedListTabulatedFunction(sqr, 23, 0, 100);
-        });
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 23, 0, 100));
+    }
+
+    @Test
+    public void testIteratorWhile() {
+        TabulatedFunction array = createFromArray();
+        Iterator<Point> arrayIterator = array.iterator();
+
+        int i = 0;
+        int j = 0;
+        while (arrayIterator.hasNext()) {
+            Point point = arrayIterator.next();
+            assertEquals(array.getX(i++), point.x);
+            assertEquals(array.getY(j++), point.y);
+
+        }
+    }
+
+    @Test
+    public void testIteratorForEach() {
+        TabulatedFunction tabulatedFunction = createFirstFunction();
+        Iterator<Point> functionIterator = tabulatedFunction.iterator();
+
+        int i = 0;
+        int j = 0;
+        for (Point point : tabulatedFunction) {
+            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+        }
     }
 
     @AfterMethod
