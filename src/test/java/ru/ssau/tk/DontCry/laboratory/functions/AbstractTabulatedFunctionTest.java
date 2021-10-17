@@ -28,6 +28,6 @@ public class AbstractTabulatedFunctionTest {
 
     @AfterMethod
     void afterMethod() {
-        System.out.println("MockTabulatedFunctionTest checked");
+        System.out.println("AbstractTabulatedFunctionTest checked");
     }
 }
