@@ -2,6 +2,8 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import ru.ssau.tk.DontCry.laboratory.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 
 import static org.testng.Assert.*;
 
@@ -24,6 +26,28 @@ public class AbstractTabulatedFunctionTest {
         assertEquals(function.apply(2.9), 5.4, DELTA);
         assertEquals(function.apply(5.7), 7.0411, DELTA);
         assertEquals(function.apply(-4.6), -2.35, DELTA);
+    }
+
+    @Test
+    public void testCheckLengthIsTheSame() {
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            double[] valuesX = new double[]{-3, 5};
+            double[] valuesY = new double[]{9};
+            AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
+        });
+        double[] valuesX = new double[]{-3, 5};
+        double[] valuesY = new double[]{9, 0};
+        AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
+    }
+
+    @Test
+    public void testCheckSorted() {
+        assertThrows(ArrayIsNotSortedException.class, () -> {
+            double[] valuesX = new double[]{1, 10, 3, 4};
+            AbstractTabulatedFunction.checkSorted(valuesX);
+        });
+        double[] valuesX = new double[]{1, 3, 4, 10};
+        AbstractTabulatedFunction.checkSorted(valuesX);
     }
 
     @AfterMethod
