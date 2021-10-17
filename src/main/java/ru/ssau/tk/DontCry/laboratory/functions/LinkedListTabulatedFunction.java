@@ -7,11 +7,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
     private int count = 0;
 
-    @Override
-    public Iterator<Point> iterator() {
-        return null;
-    }
-
     protected static class Node {
         public Node next;
         public Node prev;
@@ -218,5 +213,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         Node node = floorNodeOfX(x);
         return interpolate(x, node.x, node.next.x, node.y, node.next.y);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }

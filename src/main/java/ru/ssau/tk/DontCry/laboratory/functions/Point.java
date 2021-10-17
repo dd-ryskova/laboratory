@@ -1,6 +1,7 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
 public class Point {
+
     public final double x;
     public final double y;
 
