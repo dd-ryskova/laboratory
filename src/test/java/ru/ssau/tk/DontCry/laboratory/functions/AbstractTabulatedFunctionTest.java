@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class MockTabulatedFunctionTest {
+public class AbstractTabulatedFunctionTest {
 
     private static final double DELTA = 0.0001;
 

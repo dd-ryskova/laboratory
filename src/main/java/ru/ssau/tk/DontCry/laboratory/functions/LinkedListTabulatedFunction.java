@@ -1,9 +1,16 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node head;
     private int count = 0;
+
+    @Override
+    public Iterator<Point> iterator() {
+        return null;
+    }
 
     protected static class Node {
         public Node next;
@@ -160,6 +167,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
     }
 
+    private Node floorNodeOfX(double x) {
+        if (x < head.x) {
+            throw new IllegalArgumentException("X меньше левой границы в списке!");
+        }
+        Node indexNode = head;
+        for (int i = 0; i < count; i++) {
+            if (indexNode.x <= x) {
+                indexNode = indexNode.next;
+            } else {
+                return indexNode.prev;
+            }
+        }
+        return head.prev;
+    }
+
     @Override
     public double extrapolateLeft(double x) {
         if (head.x == head.prev.x) {
@@ -194,6 +216,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         } else if (x > rightBound()) {
             return extrapolateRight(x);
         }
-        return interpolate(x, floorIndexOfX(x));
+        Node node = floorNodeOfX(x);
+        return interpolate(x, node.x, node.next.x, node.y, node.next.y);
     }
 }
