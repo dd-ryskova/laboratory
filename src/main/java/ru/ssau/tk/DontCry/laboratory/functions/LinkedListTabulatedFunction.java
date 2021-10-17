@@ -19,6 +19,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина массива меньше минимальной!");
         } else {
+            checkLengthIsTheSame(xValues, yValues);
+            checkSorted(xValues);
             for (int i = 0; i < xValues.length; i++) {
                 this.addNode(xValues[i], yValues[i]);
             }
