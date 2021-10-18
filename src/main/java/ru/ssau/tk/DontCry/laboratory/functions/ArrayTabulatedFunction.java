@@ -4,6 +4,7 @@ import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] xValues;
@@ -13,7 +14,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина массива меньше минимальной!");
-        }else {
+        } else {
             checkLengthIsTheSame(xValues, yValues);
             checkSorted(xValues);
             this.xValues = Arrays.copyOf(xValues, xValues.length);
@@ -111,14 +112,31 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        /* if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
             throw new InterpolationException("X is out of bounds of interpolation");
-        }*/
+        }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < count;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(xValues[i], yValues[i]);
+                i++;
+                return point;
+            }
+        };
     }
 }
