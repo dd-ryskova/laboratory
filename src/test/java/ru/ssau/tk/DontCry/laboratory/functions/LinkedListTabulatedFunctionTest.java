@@ -2,6 +2,7 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -224,11 +225,18 @@ public class LinkedListTabulatedFunctionTest {
         TabulatedFunction thirdFunction = createThirdFunction();
         TabulatedFunction fourthFunction = createFourthFunction();
 
-        assertEquals(array.interpolate(4.0, 2), 5.0);
-        assertEquals(firstFunction.interpolate(5.5, 4), 30.5, DELTA);
+        assertEquals(array.interpolate(6, 2), 7., DELTA);
+        assertEquals(firstFunction.interpolate(2.75, 1), 7.75, DELTA);
         assertEquals(secondFunction.interpolate(-25.01, secondFunction.floorIndexOfX(-25.01)), 0, DELTA);
         assertEquals(thirdFunction.interpolate(-3.23, thirdFunction.floorIndexOfX(-3.23)), -3.23, DELTA);
         assertEquals(fourthFunction.interpolate(-3.09422, fourthFunction.floorIndexOfX(-3.09422)), -3.18844, DELTA);
+
+        assertThrows(InterpolationException.class, () -> {
+            array.interpolate(4., 2);
+        });
+        assertThrows(InterpolationException.class, () -> {
+            firstFunction.interpolate(5., 1);
+        });
     }
 
     @Test

@@ -2,6 +2,7 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import static org.testng.Assert.*;
 
@@ -140,10 +141,10 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(firstFunction.extrapolateLeft(5.), 12., DELTA);
-        assertEquals(firstFunction.extrapolateLeft(8.), 20.25, DELTA);
-        assertEquals(secondFunction.extrapolateLeft(5.), 5.2, DELTA);
-        assertEquals(secondFunction.extrapolateLeft(8.), 7.6, DELTA);
+        assertEquals(firstFunction.extrapolateLeft(1.25), 1.6875, DELTA);
+        assertEquals(firstFunction.extrapolateLeft(1.5), 2.375, DELTA);
+        assertEquals(secondFunction.extrapolateLeft(3.), 3.6, DELTA);
+        assertEquals(secondFunction.extrapolateLeft(3.5), 4., DELTA);
     }
 
     @Test
@@ -151,10 +152,10 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = createFirstFunction();
         TabulatedFunction secondFunction = createSecondFunction();
 
-        assertEquals(firstFunction.extrapolateRight(5.), 23.25, DELTA);
-        assertEquals(firstFunction.extrapolateRight(8.), 45., DELTA);
-        assertEquals(secondFunction.extrapolateRight(5.), 6.9, DELTA);
-        assertEquals(secondFunction.extrapolateRight(8.), 8.55, DELTA);
+        assertEquals(firstFunction.extrapolateRight(3.5), 12.375, DELTA);
+        assertEquals(firstFunction.extrapolateRight(3.75), 14.1875, DELTA);
+        assertEquals(secondFunction.extrapolateRight(5), 6.9, DELTA);
+        assertEquals(secondFunction.extrapolateRight(6), 7.45, DELTA);
     }
 
     @Test
@@ -163,30 +164,11 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction secondFunction = createSecondFunction();
 
         assertEquals(firstFunction.interpolate(2., 1), 4.125, DELTA);
-        assertEquals(firstFunction.interpolate(8., 2), 37.875, DELTA);
-        assertEquals(secondFunction.interpolate(5., 2), 6.9, DELTA);
-        assertEquals(secondFunction.interpolate(8., 1), 12.7, DELTA);
-    }
+        assertEquals(firstFunction.interpolate(3, 2), 9.125, DELTA);
+        assertEquals(secondFunction.interpolate(7., 2), 8., DELTA);
 
-    @Test
-    public void testCompositeFunction() {
-        TabulatedFunction thirdFunction = createThirdFunction();
-        TabulatedFunction fourthFunction = createFourthFunction();
-        TabulatedFunction fifthFunction = createFifthFunction();
-
-        assertEquals(fourthFunction.andThen(thirdFunction).apply(1.), 0., DELTA);
-        assertEquals(fourthFunction.andThen(fifthFunction).apply(4.), 11., DELTA);
-        assertEquals(thirdFunction.andThen(fourthFunction).apply(-12), 0., DELTA);
-        assertEquals(thirdFunction.andThen(fifthFunction).apply(154.), 3., DELTA);
-        assertEquals(fifthFunction.andThen(thirdFunction).apply(-3.), 0., DELTA);
-        assertEquals(fifthFunction.andThen(fourthFunction).apply(11.), 25., DELTA);
-        assertEquals(fifthFunction.andThen(fourthFunction).andThen(thirdFunction).apply(-2.5), 0., DELTA);
-        assertEquals(fifthFunction.andThen(thirdFunction).andThen(fourthFunction).apply(7), 0., DELTA);
-        assertEquals(thirdFunction.andThen(fourthFunction).andThen(fifthFunction).apply(9), 3., DELTA);
-        assertEquals(thirdFunction.andThen(fifthFunction).andThen(fourthFunction).apply(-3.9), 3., DELTA);
-        assertEquals(fourthFunction.andThen(fifthFunction).andThen(thirdFunction).apply(100.), 0., DELTA);
-        assertEquals(fifthFunction.andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
-        assertEquals(fifthFunction.andThen(fourthFunction).andThen(thirdFunction).andThen(fifthFunction).apply(-2.5), 3., DELTA);
+        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5, 2));
+        assertThrows(InterpolationException.class, () -> secondFunction.interpolate(4.9, 0));
     }
 
     @AfterMethod
