@@ -4,6 +4,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
+import java.util.Iterator;
+
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
@@ -169,6 +171,34 @@ public class ArrayTabulatedFunctionTest {
 
         assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5, 2));
         assertThrows(InterpolationException.class, () -> secondFunction.interpolate(4.9, 0));
+    }
+
+    @Test
+    public void testIteratorWhile() {
+        TabulatedFunction array = createFirstFunction();
+        Iterator<Point> arrayIterator = array.iterator();
+
+        int i = 0;
+        int j = 0;
+        while (arrayIterator.hasNext()) {
+            Point point = arrayIterator.next();
+            assertEquals(array.getX(i++), point.x);
+            assertEquals(array.getY(j++), point.y);
+
+        }
+    }
+
+    @Test
+    public void testIteratorForEach() {
+        TabulatedFunction tabulatedFunction = createFirstFunction();
+        Iterator<Point> functionIterator = tabulatedFunction.iterator();
+
+        int i = 0;
+        int j = 0;
+        for (Point point : tabulatedFunction) {
+            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+        }
     }
 
     @AfterMethod
