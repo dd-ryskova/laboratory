@@ -2,7 +2,8 @@ package ru.ssau.tk.DontCry.laboratory.operations;
 
 import ru.ssau.tk.DontCry.laboratory.functions.*;
 
-public class MiddleSteppingDifferentialOperator extends SteppingDifferentialOperator{
+public class MiddleSteppingDifferentialOperator extends SteppingDifferentialOperator {
+
     public MiddleSteppingDifferentialOperator(double step) {
         super(step);
     }
