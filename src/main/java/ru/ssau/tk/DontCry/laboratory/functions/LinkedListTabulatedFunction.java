@@ -1,5 +1,7 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
+import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -200,6 +202,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public double interpolate(double x, int floorIndex) {
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
+        if (x < leftNode.x || x > rightNode.x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         if (head.x == head.prev.x) {
             return head.y;
         } else {
