@@ -30,14 +30,14 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     public static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
-            throw new DifferentLengthOfArraysException("Lengths of xValues and yValues are different");
+            throw new DifferentLengthOfArraysException("Длины массивов не совпадают.");
         }
     }
 
     public static void checkSorted(double[] xValues) {
         for (int i = 0; i < xValues.length - 1; i++) {
             if (xValues[i + 1] < xValues[i]) {
-                throw new ArrayIsNotSortedException("xValues is not sort");
+                throw new ArrayIsNotSortedException("Элементы массива xValues не сортированы.");
             }
         }
     }

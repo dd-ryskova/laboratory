@@ -113,7 +113,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double interpolate(double x, int floorIndex) {
         if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
-            throw new InterpolationException("X is out of bounds of interpolation");
+            throw new InterpolationException("X не находится внутри интервала интерполирования.");
         }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
