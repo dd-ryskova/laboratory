@@ -3,6 +3,7 @@ package ru.ssau.tk.DontCry.laboratory.operations;
 import ru.ssau.tk.DontCry.laboratory.functions.MathFunction;
 
 public abstract class SteppingDifferentialOperator implements DifferentialOperator<MathFunction> {
+
     protected double step;
 
     public SteppingDifferentialOperator(double step) {

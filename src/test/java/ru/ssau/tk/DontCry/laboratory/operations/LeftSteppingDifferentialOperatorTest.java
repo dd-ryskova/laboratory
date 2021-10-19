@@ -8,6 +8,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.SqrFunction;
 import static org.testng.Assert.*;
 
 public class LeftSteppingDifferentialOperatorTest {
+
     private final static double DELTA = 0.001;
     private final static double step = 0.01;
 

@@ -7,6 +7,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.SqrFunction;
 import static org.testng.Assert.assertEquals;
 
 public class MiddleSteppingDifferentialOperatorTest {
+
     private final static double DELTA = 0.001;
     private final static double step = 0.01;
 
