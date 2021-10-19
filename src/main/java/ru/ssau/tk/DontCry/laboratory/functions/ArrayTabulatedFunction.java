@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+
     private final double[] xValues;
     private final double[] yValues;
     private final int count;
@@ -120,7 +121,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        return new Iterator<Point>() {
+        return new Iterator<>() {
             int i = 0;
 
             @Override

@@ -1,6 +1,7 @@
 package ru.ssau.tk.DontCry.laboratory.exceptions;
 
 public class DifferentLengthOfArraysException extends RuntimeException {
+
     public DifferentLengthOfArraysException() {
     }
 
