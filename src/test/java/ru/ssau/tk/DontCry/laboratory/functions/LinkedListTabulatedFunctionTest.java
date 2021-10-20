@@ -229,27 +229,6 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(secondFunction.interpolate(-25.01, secondFunction.floorIndexOfX(-25.01)), 0, DELTA);
         assertEquals(thirdFunction.interpolate(-3.23, thirdFunction.floorIndexOfX(-3.23)), -3.23, DELTA);
         assertEquals(fourthFunction.interpolate(-3.09422, fourthFunction.floorIndexOfX(-3.09422)), -3.18844, DELTA);
-
-        assertThrows(InterpolationException.class, () -> array.interpolate(4., 2));
-        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5., 1));
-    }
-
-    @Test
-    public void testCompositeFunction() {
-        MathFunction firstFunction = createFirstFunction();
-        MathFunction secondFunction = createSecondFunction();
-        MathFunction thirdFunction = createThirdFunction();
-        MathFunction fourthFunction = createFourthFunction();
-
-        assertEquals(firstFunction.andThen(secondFunction).apply(2), 0., DELTA);
-        assertEquals(firstFunction.andThen(thirdFunction).apply(12.5), 147.5, DELTA);
-        assertEquals(firstFunction.andThen(fourthFunction).apply(-3), -19., DELTA);
-        assertEquals(secondFunction.andThen(firstFunction).apply(6), -2., DELTA);
-        assertEquals(secondFunction.andThen(thirdFunction).apply(-5.7), 0., DELTA);
-        assertEquals(secondFunction.andThen(fourthFunction).apply(0), 3., DELTA);
-        assertEquals(thirdFunction.andThen(fourthFunction).apply(43463.5), 86930., DELTA);
-        assertEquals(thirdFunction.andThen(firstFunction).andThen(fourthFunction).apply(1.1), 5.6, DELTA);
-        assertEquals(fourthFunction.andThen(thirdFunction).andThen(fourthFunction).andThen(firstFunction).apply(-12.3), -122.6, DELTA);
     }
 
     @Test
@@ -265,6 +244,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testIllegalArgumentException() {
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = createFirstFunction();
+
         assertThrows(IllegalArgumentException.class, () -> createFromArray().getX(-2));
         assertThrows(IllegalArgumentException.class, () -> createFromArray().getY(-1));
         assertThrows(IllegalArgumentException.class, () -> {
@@ -273,6 +255,8 @@ public class LinkedListTabulatedFunctionTest {
             new LinkedListTabulatedFunction(xValues, yValues);
         });
         assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 23, 0, 100));
+        assertThrows(InterpolationException.class, () -> array.interpolate(4., 2));
+        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5., 1));
     }
 
     @Test

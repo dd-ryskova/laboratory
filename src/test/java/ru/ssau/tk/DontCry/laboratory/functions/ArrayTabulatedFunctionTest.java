@@ -168,9 +168,21 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.interpolate(2., 1), 4.125, DELTA);
         assertEquals(firstFunction.interpolate(3, 2), 9.125, DELTA);
         assertEquals(secondFunction.interpolate(7., 2), 8., DELTA);
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        TabulatedFunction firstFunction = createFirstFunction();
+        TabulatedFunction secondFunction = createSecondFunction();
 
         assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5, 2));
         assertThrows(InterpolationException.class, () -> secondFunction.interpolate(4.9, 0));
+        assertThrows(IllegalArgumentException.class, () -> {
+            double[] xValues = new double[]{2, 4};
+            double[] yValues = new double[]{2};
+            new LinkedListTabulatedFunction(xValues, yValues);
+            assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 23, 24, -100));
+        });
     }
 
     @Test
@@ -191,7 +203,6 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testIteratorForEach() {
         TabulatedFunction tabulatedFunction = createFirstFunction();
-        Iterator<Point> functionIterator = tabulatedFunction.iterator();
 
         int i = 0;
         int j = 0;
