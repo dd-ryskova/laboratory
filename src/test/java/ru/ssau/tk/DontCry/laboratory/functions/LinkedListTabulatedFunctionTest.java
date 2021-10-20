@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
@@ -231,12 +230,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(thirdFunction.interpolate(-3.23, thirdFunction.floorIndexOfX(-3.23)), -3.23, DELTA);
         assertEquals(fourthFunction.interpolate(-3.09422, fourthFunction.floorIndexOfX(-3.09422)), -3.18844, DELTA);
 
-        assertThrows(InterpolationException.class, () -> {
-            array.interpolate(4., 2);
-        });
-        assertThrows(InterpolationException.class, () -> {
-            firstFunction.interpolate(5., 1);
-        });
+        assertThrows(InterpolationException.class, () -> array.interpolate(4., 2));
+        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5., 1));
     }
 
     @Test
@@ -289,8 +284,8 @@ public class LinkedListTabulatedFunctionTest {
         int j = 0;
         while (arrayIterator.hasNext()) {
             Point point = arrayIterator.next();
-            assertEquals(array.getX(i++), point.x);
-            assertEquals(array.getY(j++), point.y);
+            assertEquals(point.x, array.getX(i++));
+            assertEquals(point.y, array.getY(j++));
 
         }
     }
@@ -298,7 +293,6 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testIteratorForEach() {
         TabulatedFunction tabulatedFunction = createFirstFunction();
-        Iterator<Point> functionIterator = tabulatedFunction.iterator();
 
         int i = 0;
         int j = 0;
