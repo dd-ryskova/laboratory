@@ -27,10 +27,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         xValues = new double[count];
         yValues = new double[count];
-        double step = (xTo - xFrom) / (count - 1);
-        for (int i = 0; i < count; i++) {
-            xValues[i] = xFrom + i * step;
-            yValues[i] = source.apply(xFrom + i * step);
+        if (xFrom >= xTo) {
+            throw new IllegalArgumentException("Неправильные значения входных параметров!");
+        } else {
+            double step = (xTo - xFrom) / (count - 1);
+            for (int i = 0; i < count; i++) {
+                xValues[i] = xFrom + i * step;
+                yValues[i] = source.apply(xFrom + i * step);
+            }
         }
         this.count = count;
     }
@@ -97,24 +101,18 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        if (this.count == 1) {
-            return this.yValues[0];
-        }
         return interpolate(x, 0);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1) {
-            return yValues[0];
-        }
         return interpolate(x, count - 2);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
         if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
-            throw new InterpolationException("X не находится внутри интервала интерполирования.");
+            throw new InterpolationException("X не находится внутри интервала интерполирования!");
         }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }

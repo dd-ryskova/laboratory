@@ -39,7 +39,7 @@ public class TabulatedFunctionOperationService {
 
     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
         if (a.getCount() != b.getCount()) {
-            throw new InconsistentFunctionsException("Количества записей в табулированных функциях не совпадают.");
+            throw new InconsistentFunctionsException("Количества записей в табулированных функциях не совпадают!");
         }
 
         Point[] aPoints = asPoints(a);
@@ -49,7 +49,7 @@ public class TabulatedFunctionOperationService {
 
         for (int i = 0; i < a.getCount(); i++) {
             if (aPoints[i].x != bPoints[i].x) {
-                throw new InconsistentFunctionsException("Координаты x двух функций разные.");
+                throw new InconsistentFunctionsException("Координаты x двух функций разные!");
             }
             xValues[i] = aPoints[i].x;
             yValues[i] = operation.apply(aPoints[i].y, bPoints[i].y);

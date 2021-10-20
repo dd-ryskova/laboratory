@@ -197,7 +197,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
         if (x < leftNode.x || x > rightNode.x) {
-            throw new InterpolationException("X is out of bounds of interpolation");
+            throw new InterpolationException("X за пределами интерполяции!");
         } else {
             return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
         }
