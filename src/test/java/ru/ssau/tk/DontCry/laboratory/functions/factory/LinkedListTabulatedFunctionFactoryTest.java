@@ -10,7 +10,7 @@ public class LinkedListTabulatedFunctionFactoryTest {
     public double[] xValues = {1, 2, 3, 4};
     public double[] yValues = {2, 4, 6, 6};
 
-    LinkedListTabulatedFunctionFactory array = new LinkedListTabulatedFunctionFactory();
+    public LinkedListTabulatedFunctionFactory array = new LinkedListTabulatedFunctionFactory();
 
     @Test
     public void testCreate() {

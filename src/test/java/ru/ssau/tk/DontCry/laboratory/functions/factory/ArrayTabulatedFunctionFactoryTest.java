@@ -10,7 +10,7 @@ public class ArrayTabulatedFunctionFactoryTest {
     public double[] xValues = {1, 2, 3, 4};
     public double[] yValues = {2, 4, 6, 6};
 
-    ArrayTabulatedFunctionFactory array = new ArrayTabulatedFunctionFactory();
+    public ArrayTabulatedFunctionFactory array = new ArrayTabulatedFunctionFactory();
 
     @Test
     public void testCreate() {
