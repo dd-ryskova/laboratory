@@ -17,10 +17,10 @@ public class TabulatedFunctionOperationServiceTest {
     private final double[] valuesYArray = new double[]{-2, -4, 7, 0};
     private final double[] valuesYList = new double[]{-1, 2, -3, 4};
 
-    ArrayTabulatedFunction testArrayFunction = new ArrayTabulatedFunction(valuesX, valuesYArray);
-    LinkedListTabulatedFunction testListFunction = new LinkedListTabulatedFunction(valuesX, valuesYList);
+    public ArrayTabulatedFunction testArrayFunction = new ArrayTabulatedFunction(valuesX, valuesYArray);
+    public LinkedListTabulatedFunction testListFunction = new LinkedListTabulatedFunction(valuesX, valuesYList);
 
-    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    public TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
 
     @Test
     public void testAsPoints() {
