@@ -58,18 +58,6 @@ public class TabulatedDifferentialOperatorTest {
         assertEquals(array.getY(5), 11.);
     }
 
-    @Test
-    public void testGetFactory() {
-        assertTrue(factory.getFactory() instanceof ArrayTabulatedFunctionFactory);
-        assertTrue(new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
-    }
-
-    @Test
-    public void testSetFactory() {
-        factory.setFactory(new LinkedListTabulatedFunctionFactory());
-        assertTrue(factory.getFactory() instanceof LinkedListTabulatedFunctionFactory);
-    }
-
     @AfterMethod
     void afterMethod() {
         System.out.println("TabulatedDifferentialOperator checked");

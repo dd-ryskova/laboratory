@@ -42,18 +42,6 @@ public class TabulatedFunctionOperationServiceTest {
     }
 
     @Test
-    public void testGetFactory() {
-        assertTrue(service.getFactory() instanceof ArrayTabulatedFunctionFactory);
-        assertTrue(new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
-    }
-
-    @Test
-    public void testSetFactory() {
-        service.setFactory(new LinkedListTabulatedFunctionFactory());
-        assertTrue(service.getFactory() instanceof LinkedListTabulatedFunctionFactory);
-    }
-
-    @Test
     public void testSum() {
         TabulatedFunction testArrayFunction = new ArrayTabulatedFunction(valuesX, valuesYArray);
         TabulatedFunction testListFunction = new LinkedListTabulatedFunction(valuesX, valuesYList);
