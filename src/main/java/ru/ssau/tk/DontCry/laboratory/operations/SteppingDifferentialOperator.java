@@ -7,7 +7,7 @@ public abstract class SteppingDifferentialOperator implements DifferentialOperat
     protected double step;
 
     public SteppingDifferentialOperator(double step) {
-        if (step <= 0 || Double.isNaN(step)) {
+        if (step <= 0 || Double.isNaN(step) || Double.isInfinite(step)) {
             throw new IllegalArgumentException("Шаг не соответствует требованиям.");
         } else {
             this.step = step;

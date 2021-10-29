@@ -15,13 +15,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина массива меньше минимальной!");
-        } else {
-            checkLengthIsTheSame(xValues, yValues);
-            checkSorted(xValues);
-            this.xValues = Arrays.copyOf(xValues, xValues.length);
-            this.yValues = Arrays.copyOf(yValues, yValues.length);
-            this.count = xValues.length;
         }
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
+        this.xValues = Arrays.copyOf(xValues, xValues.length);
+        this.yValues = Arrays.copyOf(yValues, yValues.length);
+        this.count = xValues.length;
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
@@ -29,12 +28,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         yValues = new double[count];
         if (xFrom >= xTo) {
             throw new IllegalArgumentException("Неправильные значения входных параметров!");
-        } else {
-            double step = (xTo - xFrom) / (count - 1);
-            for (int i = 0; i < count; i++) {
-                xValues[i] = xFrom + i * step;
-                yValues[i] = source.apply(xFrom + i * step);
-            }
+        }
+        double step = (xTo - xFrom) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            xValues[i] = xFrom + i * step;
+            yValues[i] = source.apply(xFrom + i * step);
+
         }
         this.count = count;
     }
