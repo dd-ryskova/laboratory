@@ -191,11 +191,10 @@ public class ArrayTabulatedFunctionTest {
         Iterator<Point> arrayIterator = array.iterator();
 
         int i = 0;
-        int j = 0;
         while (arrayIterator.hasNext()) {
             Point point = arrayIterator.next();
-            assertEquals(array.getX(i++), point.x);
-            assertEquals(array.getY(j++), point.y);
+            assertEquals(array.getX(i), point.x);
+            assertEquals(array.getY(i++), point.y);
 
         }
     }
@@ -205,10 +204,9 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction tabulatedFunction = createFirstFunction();
 
         int i = 0;
-        int j = 0;
         for (Point point : tabulatedFunction) {
-            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
-            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+            assertEquals(point.x, tabulatedFunction.getX(i), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(i++), DELTA);
         }
     }
 
