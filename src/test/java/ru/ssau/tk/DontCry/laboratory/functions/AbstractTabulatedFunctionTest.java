@@ -54,4 +54,9 @@ public class AbstractTabulatedFunctionTest {
     void afterMethod() {
         System.out.println("AbstractTabulatedFunctionTest checked");
     }
+
+    @Test
+    public void testTestToString() {
+        assertEquals(new LinkedListTabulatedFunction(new double[]{0.0, 0.5, 1.0}, new double[]{0.0, 0.25, 1.0}).toString(), "LinkedListTabulatedFunction size = 3\n[0.0; 0.0]\n[0.5; 0.25]\n[1.0; 1.0]\n");
+    }
 }
