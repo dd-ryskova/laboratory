@@ -1,8 +1,7 @@
 package ru.ssau.tk.DontCry.laboratory.io;
 
-import ru.ssau.tk.DontCry.laboratory.functions.TabulatedFunction;
-import ru.ssau.tk.DontCry.laboratory.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.DontCry.laboratory.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.DontCry.laboratory.functions.*;
+import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class TabulatedFunctionFileReader {
+
     public static void main(String[] args) {
         File myFile = new File("input/function.txt");
         try (BufferedReader inArray = new BufferedReader(new FileReader(myFile));
