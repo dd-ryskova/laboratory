@@ -1,19 +1,27 @@
 package ru.ssau.tk.DontCry.laboratory.io;
 
-import ru.ssau.tk.DontCry.laboratory.functions.*
+import ru.ssau.tk.DontCry.laboratory.functions.*;
+import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
+import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-import java.io.*;
-
 final public class FunctionsIO {
-
     private FunctionsIO() {
         throw new UnsupportedOperationException();
     }
 
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream out = new DataOutputStream(outputStream);
+        out.writeInt(function.getCount());
+        for (Point point : function) {
+            out.writeDouble(point.x);
+            out.writeDouble(point.y);
+        }
+        out.flush();
+    }
 
     public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
         PrintWriter printWriter = new PrintWriter(writer);
@@ -39,15 +47,5 @@ final public class FunctionsIO {
             }
         }
         return factory.create(xValues, yValues);
-
-    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
-        DataOutputStream out = new DataOutputStream(outputStream);
-        out.writeInt(function.getCount());
-        for (Point point : function) {
-            out.writeDouble(point.x);
-            out.writeDouble(point.y);
-        }
-        out.flush();
-
     }
 }
