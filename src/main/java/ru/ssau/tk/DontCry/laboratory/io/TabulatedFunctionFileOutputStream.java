@@ -6,7 +6,6 @@ import java.io.*;
 
 import static ru.ssau.tk.DontCry.laboratory.io.FunctionsIO.*;
 
-
 public class TabulatedFunctionFileOutputStream {
 
     public static void main(String[] args) {

@@ -3,15 +3,13 @@ package ru.ssau.tk.DontCry.laboratory.io;
 import ru.ssau.tk.DontCry.laboratory.functions.*;
 import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class TabulatedFunctionFileReader {
 
     public static void main(String[] args) {
         File myFile = new File("input/function.txt");
+
         try (BufferedReader inArray = new BufferedReader(new FileReader(myFile));
              BufferedReader inList = new BufferedReader(new FileReader(myFile))) {
             TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(inArray, new ArrayTabulatedFunctionFactory());
