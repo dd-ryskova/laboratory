@@ -15,13 +15,13 @@ final public class FunctionsIO {
     }
 
     public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
-        DataOutputStream out = new DataOutputStream(outputStream);
-        out.writeInt(function.getCount());
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+        dataOutputStream.writeInt(function.getCount());
         for (Point point : function) {
-            out.writeDouble(point.x);
-            out.writeDouble(point.y);
+            dataOutputStream.writeDouble(point.x);
+            dataOutputStream.writeDouble(point.y);
         }
-        out.flush();
+        dataOutputStream.flush();
     }
 
     public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
@@ -51,14 +51,19 @@ final public class FunctionsIO {
     }
 
     public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
-        DataInputStream in = new DataInputStream(inputStream);
-        int count = in.readInt();
+        DataInputStream dataInputStream = new DataInputStream(inputStream);
+        int count = dataInputStream.readInt();
         double[] xValues = new double[count];
         double[] yValues = new double[count];
         for (int i = 0; i < count; ++i) {
-            xValues[i] = in.readDouble();
-            yValues[i] = in.readDouble();
+            xValues[i] = dataInputStream.readDouble();
+            yValues[i] = dataInputStream.readDouble();
         }
         return factory.create(xValues, yValues);
+    }
+
+    public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new BufferedInputStream(stream));
+        return (TabulatedFunction) objectInputStream.readObject();
     }
 }

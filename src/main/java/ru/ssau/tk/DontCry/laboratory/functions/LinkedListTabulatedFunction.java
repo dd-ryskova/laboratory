@@ -196,6 +196,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     @Override
     public double interpolate(double x, int floorIndex) {
         Node leftNode = getNode(floorIndex);
+        assert leftNode != null;
         Node rightNode = leftNode.next;
         if (x < leftNode.x || x > rightNode.x) {
             throw new InterpolationException("X за пределами интерполяции!");
