@@ -3,7 +3,11 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 import ru.ssau.tk.DontCry.laboratory.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+import java.io.Serializable;
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
+
+    private static final long serialVersionUID = 5293658674165082760L;
 
     public abstract int floorIndexOfX(double x);
 
