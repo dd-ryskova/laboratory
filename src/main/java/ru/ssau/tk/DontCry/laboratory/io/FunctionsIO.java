@@ -55,7 +55,7 @@ final public class FunctionsIO {
         int count = in.readInt();
         double[] xValues = new double[count];
         double[] yValues = new double[count];
-        for (int i = 0; i < count; ++i){
+        for (int i = 0; i < count; ++i) {
             xValues[i] = in.readDouble();
             yValues[i] = in.readDouble();
         }
