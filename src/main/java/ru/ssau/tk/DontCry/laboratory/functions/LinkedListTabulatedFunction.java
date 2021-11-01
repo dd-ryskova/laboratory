@@ -5,6 +5,7 @@ import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
 
@@ -13,7 +14,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     private Node head;
     private int count = 0;
 
-    protected static class Node {
+    protected static class Node implements Serializable {
+        private static final long serialVersionUID = 4266961572292281669L;
         public Node next;
         public Node prev;
         public double x;
@@ -107,7 +109,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Некорректный индекс!");
         }
-        return getNode(index).x;
+        return Objects.requireNonNull(getNode(index)).x;
     }
 
     @Override
@@ -115,12 +117,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (index < 0 | index >= count) {
             throw new IllegalArgumentException("Некорректный индекс!");
         }
-        return getNode(index).y;
+        return Objects.requireNonNull(getNode(index)).y;
     }
 
     @Override
     public void setY(int index, double value) {
-        getNode(index).y = value;
+        Objects.requireNonNull(getNode(index)).y = value;
     }
 
     @Override

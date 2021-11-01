@@ -8,6 +8,7 @@ import java.io.*;
 public class TabulatedFunctionFileReader {
 
     public static void main(String[] args) {
+
         File myFile = new File("input/function.txt");
 
         try (BufferedReader inArray = new BufferedReader(new FileReader(myFile));

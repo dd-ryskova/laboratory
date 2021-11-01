@@ -9,6 +9,7 @@ import static ru.ssau.tk.DontCry.laboratory.io.FunctionsIO.*;
 public class TabulatedFunctionFileOutputStream {
 
     public static void main(String[] args) {
+
         File fileOfArray = new File("output/array function.bin");
         File fileOfLinkedList = new File("output/linked list function.bin");
 
