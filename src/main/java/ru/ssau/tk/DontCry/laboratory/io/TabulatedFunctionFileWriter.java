@@ -17,8 +17,9 @@ public class TabulatedFunctionFileWriter {
 
             FunctionsIO.writeTabulatedFunction(outList, listFunction);
             FunctionsIO.writeTabulatedFunction(outArray, arrayFunction);
-        } catch (IOException err) {
-            err.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

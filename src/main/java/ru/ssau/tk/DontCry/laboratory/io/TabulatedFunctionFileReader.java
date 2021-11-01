@@ -18,8 +18,8 @@ public class TabulatedFunctionFileReader {
 
             TabulatedFunction listFunction = FunctionsIO.readTabulatedFunction(inList, new LinkedListTabulatedFunctionFactory());
             System.out.println(listFunction.toString());
-        } catch (IOException err) {
-            err.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

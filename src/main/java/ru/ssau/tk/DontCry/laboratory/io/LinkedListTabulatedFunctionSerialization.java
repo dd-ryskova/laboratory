@@ -12,7 +12,7 @@ public class LinkedListTabulatedFunctionSerialization {
 
     public static void main(String[] args) {
 
-        File outFile = new File("output/serialized linked list functions.bin");
+        File FileOfLinkedList = new File("output/serialized linked list functions.bin");
 
         double[] x = {1, 2, 3, 4};
         double[] y = {1, 4, 9, 16};
@@ -22,8 +22,8 @@ public class LinkedListTabulatedFunctionSerialization {
         TabulatedFunction linkedListDifferentialFirstFunction = differentialOperator.derive(linkedListFunction);
         TabulatedFunction linkedListDifferentialSecondFunction = differentialOperator.derive(linkedListDifferentialFirstFunction);
 
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outFile));
-             BufferedInputStream in = new BufferedInputStream(new FileInputStream(outFile))) {
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(FileOfLinkedList));
+             BufferedInputStream in = new BufferedInputStream(new FileInputStream(FileOfLinkedList))) {
 
             serialize(out, linkedListFunction);
             serialize(out, linkedListDifferentialFirstFunction);
