@@ -3,6 +3,8 @@ package ru.ssau.tk.DontCry.laboratory.io;
 import ru.ssau.tk.DontCry.laboratory.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.DontCry.laboratory.functions.*;
 
+import static ru.ssau.tk.DontCry.laboratory.io.FunctionsIO.*;
+
 import java.io.*;
 
 public class TabulatedFunctionFileWriter {
@@ -15,8 +17,8 @@ public class TabulatedFunctionFileWriter {
         try (BufferedWriter outArray = new BufferedWriter(new FileWriter("output/array function.txt"));
              BufferedWriter outList = new BufferedWriter(new FileWriter("output/linked list function.txt"))) {
 
-            FunctionsIO.writeTabulatedFunction(outList, listFunction);
-            FunctionsIO.writeTabulatedFunction(outArray, arrayFunction);
+            writeTabulatedFunction(outList, listFunction);
+            writeTabulatedFunction(outArray, arrayFunction);
 
         } catch (IOException e) {
             e.printStackTrace();

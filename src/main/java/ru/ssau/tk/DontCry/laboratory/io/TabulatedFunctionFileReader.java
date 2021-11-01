@@ -13,11 +13,13 @@ public class TabulatedFunctionFileReader {
 
         try (BufferedReader inArray = new BufferedReader(new FileReader(myFile));
              BufferedReader inList = new BufferedReader(new FileReader(myFile))) {
-            TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(inArray, new ArrayTabulatedFunctionFactory());
-            System.out.println(arrayFunction.toString());
 
+            TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(inArray, new ArrayTabulatedFunctionFactory());
             TabulatedFunction listFunction = FunctionsIO.readTabulatedFunction(inList, new LinkedListTabulatedFunctionFactory());
+
+            System.out.println(arrayFunction.toString());
             System.out.println(listFunction.toString());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

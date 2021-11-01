@@ -6,7 +6,8 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Locale;
+
+import static java.util.Locale.forLanguageTag;
 
 final public class FunctionsIO {
 
@@ -37,7 +38,7 @@ final public class FunctionsIO {
         int count = Integer.parseInt(reader.readLine());
         double[] xValues = new double[count];
         double[] yValues = new double[count];
-        NumberFormat formatter = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+        NumberFormat formatter = NumberFormat.getInstance(forLanguageTag("ru"));
         for (int i = 0; i < count; ++i) {
             String tempString = reader.readLine();
             try {
