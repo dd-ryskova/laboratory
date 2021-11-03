@@ -86,7 +86,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 }
             }
         }
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
