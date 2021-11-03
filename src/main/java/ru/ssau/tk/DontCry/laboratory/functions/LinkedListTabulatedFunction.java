@@ -1,5 +1,6 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
+import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина массива меньше минимальной!");
+        }
+        if (xValues.length != yValues.length) {
+            throw new DifferentLengthOfArraysException("Длина массивов разная!");
         }
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
@@ -109,7 +113,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Некорректный индекс!");
         }
-        return Objects.requireNonNull(getNode(index)).x;
+        return getNode(index).x;
     }
 
     @Override
@@ -117,12 +121,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (index < 0 | index >= count) {
             throw new IllegalArgumentException("Некорректный индекс!");
         }
-        return Objects.requireNonNull(getNode(index)).y;
+        return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
-        Objects.requireNonNull(getNode(index)).y = value;
+        getNode(index).y = value;
     }
 
     @Override

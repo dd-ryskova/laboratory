@@ -2,7 +2,7 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
+import ru.ssau.tk.DontCry.laboratory.exceptions.*;
 
 import java.util.Iterator;
 
@@ -243,7 +243,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void testIllegalArgumentException() {
+    public void testException() {
         TabulatedFunction array = createFromArray();
         TabulatedFunction firstFunction = createFirstFunction();
 
@@ -254,9 +254,17 @@ public class LinkedListTabulatedFunctionTest {
             double[] yValues = new double[]{2};
             new LinkedListTabulatedFunction(xValues, yValues);
         });
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            double[] xValues = new double[]{1, 3, 5};
+            double[] yValues = new double[]{2, 4, 6, 7};
+            new LinkedListTabulatedFunction(xValues, yValues);
+        });
+        assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.checkSorted(new double[]{10, 2, 3}));
         assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 23, 0, 100));
         assertThrows(InterpolationException.class, () -> array.interpolate(4., 2));
-        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5., 1));
+        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(-3., 2));
+        assertThrows(IllegalArgumentException.class, () -> firstFunction.floorIndexOfX(-2.));
+        assertThrows(IllegalArgumentException.class, () -> array.setY(-2, 12));
     }
 
     @Test
@@ -270,7 +278,6 @@ public class LinkedListTabulatedFunctionTest {
             Point point = arrayIterator.next();
             assertEquals(point.x, array.getX(i++));
             assertEquals(point.y, array.getY(j++));
-
         }
     }
 

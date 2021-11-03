@@ -1,5 +1,6 @@
 package ru.ssau.tk.DontCry.laboratory.functions;
 
+import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.io.Serializable;
@@ -17,6 +18,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина массива меньше минимальной!");
+        }
+        if (xValues.length != yValues.length) {
+            throw new DifferentLengthOfArraysException("Длина массивов разная!");
         }
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
