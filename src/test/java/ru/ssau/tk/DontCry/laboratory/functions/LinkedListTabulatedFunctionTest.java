@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.DontCry.laboratory.exceptions.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
@@ -273,12 +274,13 @@ public class LinkedListTabulatedFunctionTest {
         Iterator<Point> arrayIterator = array.iterator();
 
         int i = 0;
-        int j = 0;
         while (arrayIterator.hasNext()) {
             Point point = arrayIterator.next();
-            assertEquals(point.x, array.getX(i++));
-            assertEquals(point.y, array.getY(j++));
+            assertEquals(point.x, array.getX(i));
+            assertEquals(point.y, array.getY(i++));
         }
+        assertEquals(i, array.getCount());
+        assertThrows(NoSuchElementException.class, arrayIterator::next);
     }
 
     @Test
@@ -286,11 +288,11 @@ public class LinkedListTabulatedFunctionTest {
         TabulatedFunction tabulatedFunction = createFirstFunction();
 
         int i = 0;
-        int j = 0;
         for (Point point : tabulatedFunction) {
-            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
-            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+            assertEquals(point.x, tabulatedFunction.getX(i), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(i++), DELTA);
         }
+        assertEquals(i, tabulatedFunction.getCount());
     }
 
     @AfterMethod
