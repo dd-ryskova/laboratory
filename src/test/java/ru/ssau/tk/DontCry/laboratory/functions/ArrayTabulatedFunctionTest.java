@@ -2,9 +2,11 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.DontCry.laboratory.exceptions.InterpolationException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
@@ -24,18 +26,6 @@ public class ArrayTabulatedFunctionTest {
 
     private TabulatedFunction createSecondFunction() {
         return new ArrayTabulatedFunction(xValues, yValues);
-    }
-
-    private TabulatedFunction createThirdFunction() {
-        return new ArrayTabulatedFunction(zero, 2, 4, 2);
-    }
-
-    private TabulatedFunction createFourthFunction() {
-        return new ArrayTabulatedFunction(self, 1, 2, 3);
-    }
-
-    private TabulatedFunction createFifthFunction() {
-        return new ArrayTabulatedFunction(linear, 1, 4, 5);
     }
 
     @Test
@@ -180,10 +170,21 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             double[] xValues = new double[]{2, 4};
             double[] yValues = new double[]{2};
-            new LinkedListTabulatedFunction(xValues, yValues);
+            new ArrayTabulatedFunction(xValues, yValues);
             assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 23, 24, -100));
         });
     }
+
+    @Test
+    public void testDifferentLengthOfArraysException() {
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            double[] xValues = new double[]{2, 4};
+            double[] yValues = new double[]{2, 10, 8};
+            new ArrayTabulatedFunction(xValues, yValues);
+            assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(sqr, 23, 24, -100));
+        });
+    }
+
 
     @Test
     public void testIteratorWhile() {
@@ -197,6 +198,9 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(array.getY(i++), point.y);
 
         }
+        assertEquals(array.getCount(), i);
+        assertThrows(NoSuchElementException.class, arrayIterator::next);
+
     }
 
     @Test
@@ -208,6 +212,7 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(point.x, tabulatedFunction.getX(i), DELTA);
             assertEquals(point.y, tabulatedFunction.getY(i++), DELTA);
         }
+        assertEquals(tabulatedFunction.getCount(), i);
     }
 
     @AfterMethod
