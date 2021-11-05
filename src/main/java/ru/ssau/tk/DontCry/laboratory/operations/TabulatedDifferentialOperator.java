@@ -9,7 +9,7 @@ import static ru.ssau.tk.DontCry.laboratory.operations.TabulatedFunctionOperatio
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
 
-    public TabulatedFunctionFactory factory;
+    private TabulatedFunctionFactory factory;
 
     public TabulatedDifferentialOperator() {
         this.factory = new ArrayTabulatedFunctionFactory();
