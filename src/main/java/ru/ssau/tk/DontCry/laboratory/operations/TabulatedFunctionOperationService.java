@@ -6,7 +6,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
 public class TabulatedFunctionOperationService {
 
-    TabulatedFunctionFactory factory;
+    private TabulatedFunctionFactory factory;
 
     public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
         this.factory = factory;
