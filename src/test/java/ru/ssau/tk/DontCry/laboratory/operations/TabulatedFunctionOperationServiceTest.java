@@ -48,9 +48,14 @@ public class TabulatedFunctionOperationServiceTest {
 
         final double[] errorX = new double[]{0, 1, 2};
         final double[] errorY = new double[]{0, 1, 2};
+        final double[] errorX2 = new double[]{-3, 6, 10};
+
 
         TabulatedFunction errorTest = new ArrayTabulatedFunction(errorX, errorY);
         assertThrows(InconsistentFunctionsException.class, () -> serviceList.sum(testListFunction, errorTest));
+
+        TabulatedFunction errorTest2 = new ArrayTabulatedFunction(errorX2, errorY);
+        assertThrows(InconsistentFunctionsException.class, () -> serviceList.sum(testListFunction, errorTest2));
 
         TabulatedFunction sumOfArrays = serviceArray.sum(testArrayFunction, testArrayFunction);
         assertTrue(sumOfArrays instanceof ArrayTabulatedFunction);
