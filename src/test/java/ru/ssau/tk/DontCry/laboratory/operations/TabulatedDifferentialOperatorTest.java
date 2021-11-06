@@ -10,11 +10,11 @@ import static org.testng.Assert.*;
 
 public class TabulatedDifferentialOperatorTest {
 
-    public TabulatedFunction linkedList = new LinkedListTabulatedFunction(new double[]{1., 2., 3., 4., 5.}, new double[]{2., 3., 4., 5., 6.});
-    public TabulatedDifferentialOperator differentialListOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
+    private TabulatedFunction linkedList = new LinkedListTabulatedFunction(new double[]{1., 2., 3., 4., 5.}, new double[]{2., 3., 4., 5., 6.});
+    private final TabulatedDifferentialOperator differentialListOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
 
-    public TabulatedFunction array = new ArrayTabulatedFunction(new double[]{1., 2., 3., 4., 5., 6.}, new double[]{1., 4., 9, 16., 25., 36.});
-    public TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator();
+    private TabulatedFunction array = new ArrayTabulatedFunction(new double[]{1., 2., 3., 4., 5., 6.}, new double[]{1., 4., 9, 16., 25., 36.});
+    private final TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator(new ArrayTabulatedFunctionFactory());
 
     @Test
     public void testDeriveLinkedList() {
