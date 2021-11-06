@@ -17,11 +17,11 @@ public class TabulatedFunctionOperationServiceTest {
     private final double[] valuesYArray = new double[]{-2, -4, 7, 0};
     private final double[] valuesYList = new double[]{-1, 2, -3, 4};
 
-    public ArrayTabulatedFunction testArrayFunction = new ArrayTabulatedFunction(valuesX, valuesYArray);
-    public LinkedListTabulatedFunction testListFunction = new LinkedListTabulatedFunction(valuesX, valuesYList);
+    private ArrayTabulatedFunction testArrayFunction = new ArrayTabulatedFunction(valuesX, valuesYArray);
+    private LinkedListTabulatedFunction testListFunction = new LinkedListTabulatedFunction(valuesX, valuesYList);
 
-    public TabulatedFunctionOperationService serviceArray = new TabulatedFunctionOperationService();
-    public TabulatedFunctionOperationService serviceList = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
+    private TabulatedFunctionOperationService serviceArray = new TabulatedFunctionOperationService();
+    private TabulatedFunctionOperationService serviceList = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
 
     @Test
     public void testAsPoints() {

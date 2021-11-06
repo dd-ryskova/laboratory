@@ -11,7 +11,7 @@ public class AbstractTabulatedFunctionTest {
 
     private static final double DELTA = 0.0001;
 
-    MockTabulatedFunction function = new MockTabulatedFunction();
+    private final MockTabulatedFunction function = new MockTabulatedFunction();
 
     @Test
     public void testInterpolate() {
