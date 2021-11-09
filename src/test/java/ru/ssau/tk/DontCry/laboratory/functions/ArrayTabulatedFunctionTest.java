@@ -16,9 +16,6 @@ public class ArrayTabulatedFunctionTest {
     private final double[] yValues = new double[]{2., 4., 6.9, 8.};
 
     private final MathFunction sqr = new SqrFunction();
-    private final MathFunction zero = new ZeroFunction();
-    private final MathFunction self = new IdentityFunction();
-    private final MathFunction linear = new LinearFunction();
 
     private TabulatedFunction createFirstFunction() {
         return new ArrayTabulatedFunction(sqr, 1, 4, 5);
