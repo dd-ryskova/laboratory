@@ -16,9 +16,6 @@ public class ArrayTabulatedFunctionTest {
     private final double[] yValues = new double[]{2., 4., 6.9, 8.};
 
     private final MathFunction sqr = new SqrFunction();
-    private final MathFunction zero = new ZeroFunction();
-    private final MathFunction self = new IdentityFunction();
-    private final MathFunction linear = new LinearFunction();
 
     private TabulatedFunction createFirstFunction() {
         return new ArrayTabulatedFunction(sqr, 1, 4, 5);
@@ -167,24 +164,24 @@ public class ArrayTabulatedFunctionTest {
 
         assertThrows(InterpolationException.class, () -> firstFunction.interpolate(5, 2));
         assertThrows(InterpolationException.class, () -> secondFunction.interpolate(4.9, 0));
+
         assertThrows(IllegalArgumentException.class, () -> {
-            double[] xValues = new double[]{2, 4};
-            double[] yValues = new double[]{2};
+            double[] xValues = new double[]{2};
+            double[] yValues = new double[]{1};
             new ArrayTabulatedFunction(xValues, yValues);
-            assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 23, 24, -100));
         });
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 55, 51, 1000));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 50, 23, 100));
     }
 
     @Test
     public void testDifferentLengthOfArraysException() {
         assertThrows(DifferentLengthOfArraysException.class, () -> {
-            double[] xValues = new double[]{2, 4};
-            double[] yValues = new double[]{2, 10, 8};
+            double[] xValues = new double[]{2, 4, 6};
+            double[] yValues = new double[]{2, 8, 10, 12};
             new ArrayTabulatedFunction(xValues, yValues);
-            assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(sqr, 23, 24, -100));
         });
     }
-
 
     @Test
     public void testIteratorWhile() {
