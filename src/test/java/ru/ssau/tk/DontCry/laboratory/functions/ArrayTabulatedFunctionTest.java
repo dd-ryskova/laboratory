@@ -174,7 +174,7 @@ public class ArrayTabulatedFunctionTest {
             new ArrayTabulatedFunction(xValues, yValues);
         });
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 55, 51, 1000));
-        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 50, 24, 100));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 50, 23, 100));
     }
 
     @Test
