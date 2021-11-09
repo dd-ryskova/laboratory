@@ -2,11 +2,8 @@ package ru.ssau.tk.DontCry.laboratory.operations;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.ssau.tk.DontCry.laboratory.functions.ArrayTabulatedFunction;
-import ru.ssau.tk.DontCry.laboratory.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.DontCry.laboratory.functions.TabulatedFunction;
-import ru.ssau.tk.DontCry.laboratory.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.DontCry.laboratory.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.DontCry.laboratory.functions.*;
+import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
 import static java.lang.Math.pow;
 import static org.testng.Assert.*;
@@ -19,8 +16,6 @@ public class TabulatedDifferentialOperatorTest {
     private TabulatedFunction array = new ArrayTabulatedFunction(new double[]{1., 2., 3., 4., 5., 6.}, new double[]{1., 4., 9, 16., 25., 36.});
     private final TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator(new ArrayTabulatedFunctionFactory());
 
-    public TabulatedDifferentialOperator factory = new TabulatedDifferentialOperator();
-
     @Test
     public void testDeriveLinkedList() {
         for (int i = 0; i < linkedList.getCount(); ++i) {
@@ -32,6 +27,7 @@ public class TabulatedDifferentialOperatorTest {
         }
 
         linkedList = differentialListOperator.derive(linkedList);
+        assertTrue(linkedList instanceof LinkedListTabulatedFunction);
 
         for (int i = 0; i < linkedList.getCount(); ++i) {
             assertEquals(linkedList.getY(i), (double) 1);
@@ -49,6 +45,7 @@ public class TabulatedDifferentialOperatorTest {
         }
 
         array = differentialArrayOperator.derive(array);
+        assertTrue(array instanceof ArrayTabulatedFunction);
 
         assertEquals(array.getY(0), 3.);
         assertEquals(array.getY(1), 5.);
