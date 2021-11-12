@@ -20,6 +20,6 @@ public class ReadWriteTaskExecutor {
         }
 
         Thread.sleep(2000);
-        System.out.println(linkedListTabulatedFunction.toString());
+        System.out.println("\n" + linkedListTabulatedFunction);
     }
 }
