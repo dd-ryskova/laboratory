@@ -1,8 +1,10 @@
 package ru.ssau.tk.DontCry.laboratory.concurrent;
 
 import ru.ssau.tk.DontCry.laboratory.functions.*;
+import ru.ssau.tk.DontCry.laboratory.operations.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public abstract class SynchronizedTabulatedFunction implements TabulatedFunction {
 
@@ -72,7 +74,25 @@ public abstract class SynchronizedTabulatedFunction implements TabulatedFunction
 
     @Override
     public Iterator<Point> iterator() {
-        return null;
+        synchronized (object) {
+            Point[] points = TabulatedFunctionOperationService.asPoints(tabulatedFunction);
+            return new Iterator<>() {
+                int i = 0;
+
+                @Override
+                public boolean hasNext() {
+                    return i != points.length;
+                }
+
+                @Override
+                public Point next() {
+                    if (!hasNext()) {
+                        throw new NoSuchElementException();
+                    }
+                    return points[i++];
+                }
+            };
+        }
     }
 
     @Override
