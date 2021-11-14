@@ -6,7 +6,7 @@ import ru.ssau.tk.DontCry.laboratory.operations.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public abstract class SynchronizedTabulatedFunction implements TabulatedFunction {
+public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     private final TabulatedFunction tabulatedFunction;
     private final Object object;
@@ -99,6 +99,34 @@ public abstract class SynchronizedTabulatedFunction implements TabulatedFunction
     public double apply(double x) {
         synchronized (object) {
             return tabulatedFunction.apply(x);
+        }
+    }
+
+    @Override
+    public int floorIndexOfX(double x) {
+        synchronized (object) {
+            return tabulatedFunction.floorIndexOfX(x);
+        }
+    }
+
+    @Override
+    public double extrapolateLeft(double x) {
+        synchronized (object) {
+            return tabulatedFunction.extrapolateLeft(x);
+        }
+    }
+
+    @Override
+    public double extrapolateRight(double x) {
+        synchronized (object) {
+            return tabulatedFunction.extrapolateRight(x);
+        }
+    }
+
+    @Override
+    public double interpolate(double x, int floorIndex) {
+        synchronized (object) {
+            return tabulatedFunction.interpolate(x, floorIndex);
         }
     }
 }

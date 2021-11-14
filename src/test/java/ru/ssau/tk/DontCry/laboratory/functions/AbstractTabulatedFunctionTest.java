@@ -2,8 +2,7 @@ package ru.ssau.tk.DontCry.laboratory.functions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.ssau.tk.DontCry.laboratory.exceptions.ArrayIsNotSortedException;
-import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.DontCry.laboratory.exceptions.*;
 
 import static org.testng.Assert.*;
 
