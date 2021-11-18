@@ -29,8 +29,8 @@ public class ArrayTabulatedFunctionSerialization {
             serialize(out, arrayDifferentialFunctionSecond);
 
             TabulatedFunction resultDifferential = deserialize(in);
-            TabulatedFunction resultDifferentialFirst = FunctionsIO.deserialize(in);
-            TabulatedFunction resultDifferentialSecond = FunctionsIO.deserialize(in);
+            TabulatedFunction resultDifferentialFirst = deserialize(in);
+            TabulatedFunction resultDifferentialSecond = deserialize(in);
 
             System.out.println(resultDifferential.toString());
             System.out.println(resultDifferentialFirst.toString());

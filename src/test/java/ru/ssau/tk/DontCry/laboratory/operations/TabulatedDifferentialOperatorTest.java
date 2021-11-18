@@ -14,7 +14,7 @@ public class TabulatedDifferentialOperatorTest {
     private final TabulatedDifferentialOperator differentialListOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
 
     private TabulatedFunction array = new ArrayTabulatedFunction(new double[]{1., 2., 3., 4., 5., 6.}, new double[]{1., 4., 9, 16., 25., 36.});
-    private final TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator(new ArrayTabulatedFunctionFactory());
+    private final TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator();
 
     @Test
     public void testDeriveLinkedList() {
