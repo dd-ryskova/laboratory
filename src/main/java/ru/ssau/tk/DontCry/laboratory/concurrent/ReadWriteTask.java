@@ -18,6 +18,7 @@ public class ReadWriteTask implements Runnable {
             x = tabulatedFunction.getX(i);
             synchronized (tabulatedFunction) {
                 y = tabulatedFunction.getY(i);
+
                 System.out.printf("%s, before write: i =  % d  , x = %f, y = %f", Thread.currentThread().getName(), i, x, y);
                 System.out.println();
                 tabulatedFunction.setY(i, y + 1);
