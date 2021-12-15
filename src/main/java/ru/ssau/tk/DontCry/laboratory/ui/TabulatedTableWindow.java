@@ -28,7 +28,7 @@ public class TabulatedTableWindow extends JDialog {
 
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(600, 400);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         container.setBackground(Color.LIGHT_GRAY);
