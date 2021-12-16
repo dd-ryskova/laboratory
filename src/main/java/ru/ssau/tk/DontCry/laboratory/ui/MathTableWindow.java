@@ -7,6 +7,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MathTableWindow extends JDialog {
 
@@ -117,7 +118,7 @@ public class MathTableWindow extends JDialog {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         MathTableWindow mathTableWindow = new MathTableWindow();
         mathTableWindow.setVisible(true);
     }

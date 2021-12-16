@@ -4,12 +4,14 @@ import ru.ssau.tk.DontCry.laboratory.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.DontCry.laboratory.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.DontCry.laboratory.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.DontCry.laboratory.functions.TabulatedFunction;
+import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class TabulatedTableWindow extends JDialog {
 
@@ -122,7 +124,7 @@ public class TabulatedTableWindow extends JDialog {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         TabulatedTableWindow tableWindow = new TabulatedTableWindow();
         tableWindow.setVisible(true);
     }

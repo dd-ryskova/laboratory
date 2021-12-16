@@ -38,9 +38,88 @@ public class MainWindow extends JFrame {
         container.add(saveButton);
 
         compose();
-        //addButtonListeners();
+        addButtonListeners();
 
         setLocationRelativeTo(null);
+    }
+
+    private void wrapTable(int countOld, int countNew) {
+        tableModel.fireTableDataChanged();
+        for (int i = 0; i < countOld; i++) {
+            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
+            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        }
+        for (int i = 0; i < countNew; i++) {
+            xValues.add(tableModel.getFunction().getX(i));
+            yValues.add(tableModel.getFunction().getY(i));
+        }
+    }
+
+    private void addButtonListeners() {
+        createFunctionButton.addActionListener(event -> {
+                    try {
+                        int countOld = xValues.size();
+                        TabulatedTableWindow.main(factory, tableModel::setFunction);
+                        int countNew = tableModel.getFunction().getCount();
+                        wrapTable(countOld, countNew);
+                    } catch (Exception e) {
+                        if (e instanceof NullPointerException) {
+                            e.printStackTrace();
+                        } else
+                            new ExceptionWindow(this, e);
+                    }
+                }
+        );
+
+        settingsButton.addActionListener(event -> {
+            try {
+                SettingWindow.main(factory);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        createMathFunctionButton.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                MathTableWindow.main(factory, tableModel::setFunction);
+                int countNew = tableModel.getFunction().getCount();
+                wrapTable(countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        openButton.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                FileReader.main(tableModel::setFunction);
+                int countNew = tableModel.getFunction().getCount();
+                wrapTable(countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        saveButton.addActionListener(event -> {
+            try {
+                FileWriter.main(tableModel.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
     }
 
     private void compose() {
