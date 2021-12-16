@@ -22,6 +22,8 @@ public class MainWindow extends JFrame {
     private final JButton differentiationButton = new JButton("Дифференцирование функции");
     private final JButton compositeFunctionButton = new JButton("Сложная функция");
 
+    JPanel grid = new JPanel();
+
     private TabulatedFunctionFactory factory;
 
     public MainWindow() {
@@ -30,17 +32,16 @@ public class MainWindow extends JFrame {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(1700, 500);
-        container.add(createFunctionButton);
-        container.add(createMathFunctionButton);
-        container.add(settingsButton);
-        container.add(openButton);
-        container.add(saveButton);
+        setSize(800, 600);
 
         compose();
         addButtonListeners();
 
         setLocationRelativeTo(null);
+        setResizable(false);
+
+        /*createMathFunctionButton.setSize(createFunctionButton.getSize());
+        createMathFunctionButton.setPreferredSize(createFunctionButton.getPreferredSize());*/
     }
 
     private void wrapTable(int countOld, int countNew) {
@@ -131,25 +132,31 @@ public class MainWindow extends JFrame {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(createFunctionButton)
-                        .addComponent(createMathFunctionButton)
+                        .addComponent(createMathFunctionButton))
+                .addGroup(layout.createSequentialGroup()
                         .addComponent(differentiationButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))
-                .addComponent(tableScrollPane)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(tableScrollPane))
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(createFunctionButton)
-                        .addComponent(createMathFunctionButton)
+                        .addComponent(createMathFunctionButton))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(differentiationButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))
-                .addComponent(tableScrollPane)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addComponent(tableScrollPane))
         );
     }
 
