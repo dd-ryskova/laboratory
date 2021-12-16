@@ -2,8 +2,11 @@ package ru.ssau.tk.DontCry.laboratory.ui;
 
 import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +16,13 @@ public class MainWindow extends JFrame {
     private final List<Double> yValues = new ArrayList<>();
     private final TableForOperations tableModel = new TableForOperations();
     private final JTable table = new JTable(tableModel);
+    JLabel topLabel = new JLabel("HelloKitty");
 
     private final JButton createFunctionButton = new JButton("Создать табулированную функцию из массивов");
     private final JButton settingsButton = new JButton("Настройки");
     private final JButton createMathFunctionButton = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
-    private final JButton differentiationButton = new JButton("Дифференцирование функции");
-    private final JButton compositeFunctionButton = new JButton("Сложная функция");
-
-    JPanel grid = new JPanel();
 
     private TabulatedFunctionFactory factory;
 
@@ -32,16 +32,52 @@ public class MainWindow extends JFrame {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(800, 580);
+        container.add(topLabel);
 
         compose();
         addButtonListeners();
 
         setLocationRelativeTo(null);
-        setResizable(false);
+        setVisible(true);
+       //setResizable(false);
 
-        /*createMathFunctionButton.setSize(createFunctionButton.getSize());
-        createMathFunctionButton.setPreferredSize(createFunctionButton.getPreferredSize());*/
+        table.setBackground(Color.WHITE);
+
+        topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
+        topLabel.setForeground(Color.PINK);
+        topLabel.setVerticalAlignment(JLabel.TOP);
+
+        createFunctionButton.setBackground(Color.PINK);
+        createFunctionButton.setForeground(Color.WHITE);
+
+        settingsButton.setBackground(Color.PINK);
+        settingsButton.setForeground(Color.WHITE);
+
+        createMathFunctionButton.setBackground(Color.PINK);
+        createMathFunctionButton.setForeground(Color.WHITE);
+
+        openButton.setBackground(Color.PINK);
+        openButton.setForeground(Color.WHITE);
+
+        saveButton.setBackground(Color.PINK);
+        saveButton.setForeground(Color.WHITE);
+
+        //backgroundImage();
+    }
+
+    public void backgroundImage() {
+        try {
+            final Image backgroundImage = javax.imageio.ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
+            setContentPane(new JPanel(new BorderLayout()) {
+                @Override
+                public void paintComponent(Graphics g) {
+                    g.drawImage(backgroundImage, 0, 0, null);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void wrapTable(int countOld, int countNew) {
@@ -131,11 +167,10 @@ public class MainWindow extends JFrame {
         JScrollPane tableScrollPane = new JScrollPane(table);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
+                        .addComponent(topLabel))
+                .addGroup(layout.createSequentialGroup()
                         .addComponent(createFunctionButton)
                         .addComponent(createMathFunctionButton))
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(differentiationButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(settingsButton)
                         .addComponent(openButton)
@@ -145,12 +180,11 @@ public class MainWindow extends JFrame {
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(topLabel))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(createFunctionButton)
                         .addComponent(createMathFunctionButton))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addComponent(differentiationButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
@@ -159,6 +193,17 @@ public class MainWindow extends JFrame {
                         .addComponent(tableScrollPane))
         );
     }
+
+    /*static class BgPanel extends JPanel {
+        public void paintComponent(Graphics g) {
+            Image im = null;
+            try {
+                im = ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
+            } catch (IOException ignored) {
+            }
+            g.drawImage(im, 5, 10, null);
+        }
+    }*/
 
     public static void main(String[] args) {
         MainWindow window = new MainWindow();

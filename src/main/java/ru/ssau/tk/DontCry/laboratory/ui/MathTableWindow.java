@@ -29,7 +29,6 @@ public class MathTableWindow extends JDialog {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setModal(true);
         setSize(500, 150);
         allFunctions();
 
@@ -41,11 +40,24 @@ public class MathTableWindow extends JDialog {
         container.add(toField);
         container.add(buttonCreateFunction);
         container.add(functionComboBox);
+        container.setBackground(Color.PINK);
+
+        fromLabel.setForeground(Color.WHITE);
+        toLabel.setForeground(Color.WHITE);
+        countLabel.setForeground(Color.WHITE);
+
+        buttonCreateFunction.setBackground(Color.WHITE);
+        buttonCreateFunction.setForeground(Color.PINK);
+
+        functionComboBox.setForeground(Color.PINK);
+        functionComboBox.setBackground(Color.WHITE);
 
         compose();
         addButtonListeners();
 
+        setModal(true);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void compose() {

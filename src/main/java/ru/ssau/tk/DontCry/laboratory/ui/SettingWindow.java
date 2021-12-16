@@ -16,16 +16,28 @@ public class SettingWindow extends JDialog {
 
     public SettingWindow(TabulatedFunctionFactory factory) {
         setTitle("Настройки");
-        setSize(new Dimension(300, 110));
+
         this.factory = factory;
 
-        setLocationRelativeTo(null);
+        setSize(new Dimension(300, 110));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setBackground(Color.PINK);
 
-        addButtonListeners();
-        compose();
         fillMap();
 
+        label.setForeground(Color.WHITE);
+
+        button.setBackground(Color.WHITE);
+        button.setForeground(Color.PINK);
+
+        functionComboBox.setForeground(Color.PINK);
+        functionComboBox.setBackground(Color.WHITE);
+
+        compose();
+        addButtonListeners();
+
         setModal(true);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
