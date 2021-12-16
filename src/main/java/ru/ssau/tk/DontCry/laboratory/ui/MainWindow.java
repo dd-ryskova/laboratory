@@ -60,17 +60,6 @@ public class MainWindow extends JFrame {
                         .addComponent(saveButton))
                 .addComponent(tableScrollPane)
         );
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(createFunctionButton)
-                        .addComponent(createMathFunctionButton)
-                        .addComponent(differentiationButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(settingsButton)
-                        .addComponent(openButton)
-                        .addComponent(saveButton))
-                .addComponent(tableScrollPane)
-        );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
