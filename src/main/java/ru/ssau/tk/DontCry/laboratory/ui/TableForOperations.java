@@ -12,8 +12,7 @@ public class TableForOperations extends AbstractTableModel {
     private static final long serialVersionUID = 5627188898700040102L;
     private TabulatedFunction function;
 
-    public TableForOperations(TabulatedFunction function) {
-        this.function = function;
+    public TableForOperations() {
     }
 
     @Override

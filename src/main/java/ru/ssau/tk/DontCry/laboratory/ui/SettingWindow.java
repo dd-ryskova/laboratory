@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.*;
 
 public class SettingWindow extends JDialog {
+
     private final JLabel label = new JLabel("Выберите тип фабрики функции:");
     private final JButton button = new JButton("OK");
     private final Map<String, TabulatedFunctionFactory> nameFunction = new HashMap<>();

@@ -17,10 +17,12 @@ public class TabulatedTableWindow extends JDialog {
     private final List<Double> yValues = new ArrayList<>();
     private final AbstractTableModel tableModel = new MyTableModel(xValues, yValues);
     private final JTable table = new JTable(tableModel);
+
     private final JLabel label = new JLabel("Введите количество точек:");
     private final JTextField countField = new JTextField();
     private final JButton inputButton = new JButton("Ввести");
     private final JButton createFunctionButton = new JButton("Создать");
+
     private TabulatedFunction tabulatedFunction;
 
     public TabulatedTableWindow() {
