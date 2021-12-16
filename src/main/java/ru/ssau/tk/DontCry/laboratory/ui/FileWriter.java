@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class FileWriter extends JDialog {
+
     public FileWriter(TabulatedFunction func) {
         setModal(true);
         JFileChooser chooser = new JFileChooser();

@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.util.function.Consumer;
 
 public class FileReader extends JDialog {
+
     private TabulatedFunction function;
     private TabulatedFunctionFactory factory;
 
@@ -36,7 +37,6 @@ public class FileReader extends JDialog {
                 }
             }
         }
-
     }
 
     public static void main(Consumer<? super TabulatedFunction> callback) {
