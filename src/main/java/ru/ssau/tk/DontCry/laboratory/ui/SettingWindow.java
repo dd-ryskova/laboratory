@@ -41,11 +41,6 @@ public class SettingWindow extends JDialog {
         setVisible(true);
     }
 
-    public static void main(TabulatedFunctionFactory factory) {
-        SettingWindow frame = new SettingWindow(factory);
-        frame.setVisible(true);
-    }
-
     private void fillMap() {
         nameFunction.put("Массив", new ArrayTabulatedFunctionFactory());
         nameFunction.put("Связный список", new LinkedListTabulatedFunctionFactory());
@@ -90,5 +85,10 @@ public class SettingWindow extends JDialog {
                 errorWindow.showExceptionWindow(this, e);
             }
         });
+    }
+
+    public static void main(TabulatedFunctionFactory factory) {
+        SettingWindow frame = new SettingWindow(factory);
+        frame.setVisible(true);
     }
 }

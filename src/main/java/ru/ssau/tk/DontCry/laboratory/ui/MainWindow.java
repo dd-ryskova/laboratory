@@ -42,8 +42,6 @@ public class MainWindow extends JFrame {
         setVisible(true);
        //setResizable(false);
 
-        table.setBackground(Color.WHITE);
-
         topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
         topLabel.setForeground(Color.PINK);
         topLabel.setVerticalAlignment(JLabel.TOP);
