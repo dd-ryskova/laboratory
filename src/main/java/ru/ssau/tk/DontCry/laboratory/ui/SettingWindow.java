@@ -16,7 +16,7 @@ public class SettingWindow extends JDialog {
 
     public SettingWindow(TabulatedFunctionFactory factory) {
         setTitle("Настройки");
-        setSize(new Dimension(300, 300));
+        setSize(new Dimension(300, 150));
         this.factory = factory;
 
         setLocationRelativeTo(null);
