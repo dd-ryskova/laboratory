@@ -17,7 +17,7 @@ public class TabulatedTableWindow extends JDialog {
 
     private final List<Double> xValues = new ArrayList<>();
     private final List<Double> yValues = new ArrayList<>();
-    private final AbstractTableModel tableModel = new MyTableModel(xValues, yValues);
+    private final AbstractTableModel tableModel = new TableModel(xValues, yValues);
     private final JTable table = new JTable(tableModel);
 
     private final JLabel label = new JLabel("Введите количество точек:");

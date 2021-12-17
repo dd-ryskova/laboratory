@@ -3,7 +3,7 @@ package ru.ssau.tk.DontCry.laboratory.ui;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class MyTableModel extends AbstractTableModel {
+public class TableModel extends AbstractTableModel {
 
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int X_COLUMN_NUMBER = 1;
@@ -12,7 +12,7 @@ public class MyTableModel extends AbstractTableModel {
     private final List<Double> xValues;
     private final List<Double> yValues;
 
-    public MyTableModel(List<Double> xValues, List<Double> yValues) {
+    public TableModel(List<Double> xValues, List<Double> yValues) {
         this.xValues = xValues;
         this.yValues = yValues;
     }
