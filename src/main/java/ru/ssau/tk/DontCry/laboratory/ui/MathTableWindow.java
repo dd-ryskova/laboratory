@@ -6,6 +6,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -25,7 +26,18 @@ public class MathTableWindow extends JDialog {
 
     public MathTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
+        setTitle("Создание функцию c помощью другой функции");
 
+        design();
+        compose();
+        addButtonListeners(callback);
+
+        setModal(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -51,13 +63,6 @@ public class MathTableWindow extends JDialog {
 
         functionComboBox.setForeground(Color.PINK);
         functionComboBox.setBackground(Color.WHITE);
-
-        compose();
-        addButtonListeners(callback);
-
-        setModal(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void compose() {
@@ -130,7 +135,7 @@ public class MathTableWindow extends JDialog {
         }
     }
 
-    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) throws IOException {
         MathTableWindow mathTableWindow = new MathTableWindow(factory, callback);
         mathTableWindow.setVisible(true);
     }

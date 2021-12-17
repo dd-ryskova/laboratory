@@ -4,6 +4,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 public class SettingWindow extends JDialog {
@@ -19,12 +20,20 @@ public class SettingWindow extends JDialog {
 
         this.factory = factory;
 
+        design();
+        fillMap();
+        compose();
+        addButtonListeners();
+
+        setModal(true);
+        setLocationRelativeTo(null);
+    }
+
+    private void design() {
         setSize(new Dimension(300, 110));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(Color.PINK);
         getContentPane().add(button);
-
-        fillMap();
 
         label.setForeground(Color.WHITE);
 
@@ -33,13 +42,6 @@ public class SettingWindow extends JDialog {
 
         functionComboBox.setForeground(Color.PINK);
         functionComboBox.setBackground(Color.WHITE);
-
-        compose();
-        addButtonListeners();
-
-        setModal(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void fillMap() {
@@ -88,7 +90,7 @@ public class SettingWindow extends JDialog {
         });
     }
 
-    public static void main(TabulatedFunctionFactory factory) {
+    public static void main(TabulatedFunctionFactory factory) throws IOException {
         SettingWindow frame = new SettingWindow(factory);
         frame.setVisible(true);
     }

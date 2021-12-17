@@ -9,6 +9,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,7 +30,17 @@ public class TabulatedTableWindow extends JDialog {
 
     public TabulatedTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
+        setTitle("Создание функции из массива");
 
+        design();
+        compose();
+        addButtonListeners(callback);
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -50,12 +61,6 @@ public class TabulatedTableWindow extends JDialog {
 
         createFunctionButton.setBackground(Color.WHITE);
         createFunctionButton.setForeground(Color.PINK);
-
-        compose();
-        addButtonListeners(callback);
-
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     void compose() {
@@ -135,7 +140,7 @@ public class TabulatedTableWindow extends JDialog {
         }
     }
 
-    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) throws IOException {
         TabulatedTableWindow tableWindow = new TabulatedTableWindow(factory, callback);
         tableWindow.setVisible(true);
     }

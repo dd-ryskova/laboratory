@@ -7,6 +7,8 @@ import ru.ssau.tk.DontCry.laboratory.operations.TabulatedFunctionOperationServic
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class OperatingWindow extends JFrame {
     private final JLabel createFirst = new JLabel("Создать первую функцию с помощью:");
     private final JLabel createSecond = new JLabel("Создать вторую функцию с помощью:");
     private final JLabel createResult = new JLabel("Ваш результат:");
-    private TabulatedFunctionFactory factory;
+    private final TabulatedFunctionFactory factory;
 
     private final JButton plus = new JButton("+");
     private final JButton subtraction = new JButton("-");
@@ -49,9 +51,18 @@ public class OperatingWindow extends JFrame {
 
         this.factory = new ArrayTabulatedFunctionFactory();
 
+        design();
+        compose();
+        addButtonListeners();
+
+        setLocationRelativeTo(null);
+    }
+
+    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        container.setBackground(Color.WHITE);
         setSize(1000, 580);
 
         container.add(plus);
@@ -71,10 +82,56 @@ public class OperatingWindow extends JFrame {
 
         container.add(saveResult);
 
-        compose();
-        addButtonListeners();
+        tableFirst.setBackground(Color.WHITE);
+        tableFirst.setGridColor(Color.PINK);
+        tableSecond.setBackground(Color.WHITE);
+        tableSecond.setGridColor(Color.PINK);
+        tableResult.setBackground(Color.WHITE);
+        tableResult.setGridColor(Color.PINK);
 
-        setLocationRelativeTo(null);
+        createFirst.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
+        createFirst.setForeground(Color.PINK);
+        createFirst.setVerticalAlignment(JLabel.TOP);
+        createSecond.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
+        createSecond.setForeground(Color.PINK);
+        createSecond.setVerticalAlignment(JLabel.TOP);
+        createResult.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
+        createResult.setForeground(Color.PINK);
+        createResult.setVerticalAlignment(JLabel.TOP);
+
+        plus.setBackground(Color.PINK);
+        plus.setForeground(Color.WHITE);
+        division.setBackground(Color.PINK);
+        division.setForeground(Color.WHITE);
+
+        multiplication.setBackground(Color.PINK);
+        multiplication.setForeground(Color.WHITE);
+
+        subtraction.setBackground(Color.PINK);
+        subtraction.setForeground(Color.WHITE);
+
+        createTubFirst.setBackground(Color.PINK);
+        createMathFirst.setBackground(Color.PINK);
+        saveFirst.setBackground(Color.PINK);
+        openFirst.setBackground(Color.PINK);
+
+        createTubFirst.setForeground(Color.WHITE);
+        createMathFirst.setForeground(Color.WHITE);
+        saveFirst.setForeground(Color.WHITE);
+        openFirst.setForeground(Color.WHITE);
+
+        createTubSecond.setBackground(Color.PINK);
+        createMathSecond.setBackground(Color.PINK);
+        saveSecond.setBackground(Color.PINK);
+        openSecond.setBackground(Color.PINK);
+
+        createTubSecond.setForeground(Color.WHITE);
+        createMathSecond.setForeground(Color.WHITE);
+        saveSecond.setForeground(Color.WHITE);
+        openSecond.setForeground(Color.WHITE);
+
+        saveResult.setBackground(Color.PINK);
+        saveResult.setForeground(Color.WHITE);
     }
 
     void compose() {
@@ -88,9 +145,9 @@ public class OperatingWindow extends JFrame {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(createFirst)
-                        .addGap(110)
+                        .addGap(76)
                         .addComponent(createSecond)
-                        .addGap(112)
+                        .addGap(75)
                         .addComponent(createResult))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(createTubFirst)
@@ -338,7 +395,7 @@ public class OperatingWindow extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
+    public static void main() throws IOException {
         OperatingWindow window = new OperatingWindow();
         window.setResizable(false);
         window.setVisible(true);

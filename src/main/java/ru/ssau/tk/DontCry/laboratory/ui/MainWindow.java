@@ -23,12 +23,22 @@ public class MainWindow extends JFrame {
     private final JButton createMathFunctionButton = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
+    private final JButton operationButton = new JButton("Операции");
 
     private TabulatedFunctionFactory factory;
 
     public MainWindow() throws IOException {
         super("Основное окно");
 
+        design();
+        compose();
+        addButtonListeners();
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void design() throws IOException {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -40,6 +50,7 @@ public class MainWindow extends JFrame {
         container.add(createMathFunctionButton);
         container.add(openButton);
         container.add(saveButton);
+        container.add(operationButton);
 
         table.setBackground(Color.WHITE);
         table.setGridColor(Color.PINK);
@@ -47,12 +58,6 @@ public class MainWindow extends JFrame {
         ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
         label.setIcon(icon);
         label.setPreferredSize(new Dimension(10, 10));
-
-        compose();
-        addButtonListeners();
-
-        setLocationRelativeTo(null);
-        setVisible(true);
 
         topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
         topLabel.setForeground(Color.PINK);
@@ -72,6 +77,9 @@ public class MainWindow extends JFrame {
 
         saveButton.setBackground(Color.PINK);
         saveButton.setForeground(Color.WHITE);
+
+        operationButton.setBackground(Color.PINK);
+        operationButton.setForeground(Color.WHITE);
     }
 
     private void wrapTable(int countOld, int countNew) {
@@ -151,6 +159,17 @@ public class MainWindow extends JFrame {
                     new ExceptionWindow(this, e);
             }
         });
+
+        operationButton.addActionListener(event -> {
+            try {
+                OperatingWindow.main();
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
     }
 
     private void compose() {
@@ -167,6 +186,7 @@ public class MainWindow extends JFrame {
                         .addComponent(createFunctionButton)
                         .addComponent(createMathFunctionButton))
                 .addGroup(layout.createSequentialGroup()
+                        .addComponent(operationButton)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -182,6 +202,7 @@ public class MainWindow extends JFrame {
                         .addComponent(createFunctionButton)
                         .addComponent(createMathFunctionButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addComponent(operationButton)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -192,7 +213,6 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) throws IOException {
         MainWindow window = new MainWindow();
-
         window.setVisible(true);
     }
 }
