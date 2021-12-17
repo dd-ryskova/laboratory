@@ -40,7 +40,7 @@ public class MainWindow extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
-       //setResizable(false);
+       setResizable(false);
 
         topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
         topLabel.setForeground(Color.PINK);
@@ -64,7 +64,7 @@ public class MainWindow extends JFrame {
         //backgroundImage();
     }
 
-    public void backgroundImage() {
+    /*public void backgroundImage() {
         try {
             final Image backgroundImage = javax.imageio.ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
             setContentPane(new JPanel(new BorderLayout()) {
@@ -76,7 +76,7 @@ public class MainWindow extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     private void wrapTable(int countOld, int countNew) {
         tableModel.fireTableDataChanged();
@@ -192,16 +192,14 @@ public class MainWindow extends JFrame {
         );
     }
 
-    /*static class BgPanel extends JPanel {
-        public void paintComponent(Graphics g) {
+    /*public void paintComponent(Graphics g) {
             Image im = null;
             try {
                 im = ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
             } catch (IOException ignored) {
             }
             g.drawImage(im, 5, 10, null);
-        }
-    }*/
+        }*/
 
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
