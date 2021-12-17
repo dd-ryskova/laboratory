@@ -27,7 +27,7 @@ public class TabulatedTableWindow extends JDialog {
 
     private TabulatedFunction tabulatedFunction;
 
-    public TabulatedTableWindow() {
+    public TabulatedTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
 
         Container container = getContentPane();
@@ -50,7 +50,7 @@ public class TabulatedTableWindow extends JDialog {
         createFunctionButton.setForeground(Color.PINK);
 
         compose();
-        addButtonListeners();
+        addButtonListeners(callback);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -81,7 +81,7 @@ public class TabulatedTableWindow extends JDialog {
         );
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
         inputButton.addActionListener(event -> {
             try {
                 createFunctionButton.setEnabled(false);
@@ -116,7 +116,7 @@ public class TabulatedTableWindow extends JDialog {
                     y[i] = yValues.get(i);
                 }
                 tabulatedFunction = new ArrayTabulatedFunctionFactory().create(x, y);
-                System.out.println(tabulatedFunction.toString());
+                callback.accept(tabulatedFunction);
                 setVisible(true);
                 this.dispose();
             } catch (Exception e) {
@@ -134,7 +134,7 @@ public class TabulatedTableWindow extends JDialog {
     }
 
     public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
-        TabulatedTableWindow tableWindow = new TabulatedTableWindow();
+        TabulatedTableWindow tableWindow = new TabulatedTableWindow(factory, callback);
         tableWindow.setVisible(true);
     }
 }

@@ -23,7 +23,7 @@ public class MathTableWindow extends JDialog {
     public static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     protected TabulatedFunction function;
 
-    public MathTableWindow() {
+    public MathTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
 
         Container container = getContentPane();
@@ -53,7 +53,7 @@ public class MathTableWindow extends JDialog {
         functionComboBox.setBackground(Color.WHITE);
 
         compose();
-        addButtonListeners();
+        addButtonListeners(callback);
 
         setModal(true);
         setLocationRelativeTo(null);
@@ -93,7 +93,7 @@ public class MathTableWindow extends JDialog {
         );
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
         buttonCreateFunction.addActionListener(evt -> {
             try {
                 String func = (String) functionComboBox.getSelectedItem();
@@ -102,7 +102,7 @@ public class MathTableWindow extends JDialog {
                 double to = Double.parseDouble(toField.getText());
                 int count = Integer.parseInt(countField.getText());
                 function = MathTableWindow.factory.create(selectedFunction, from, to, count);
-                System.out.println(function.toString());
+                callback.accept(function);
                 setVisible(true);
                 this.dispose();
             } catch (Exception e) {
@@ -131,7 +131,7 @@ public class MathTableWindow extends JDialog {
     }
 
     public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
-        MathTableWindow mathTableWindow = new MathTableWindow();
+        MathTableWindow mathTableWindow = new MathTableWindow(factory, callback);
         mathTableWindow.setVisible(true);
     }
 }
