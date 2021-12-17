@@ -24,9 +24,12 @@ public class MainWindow extends JFrame {
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
 
+    JLabel label = new JLabel();
+    ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
+
     private TabulatedFunctionFactory factory;
 
-    public MainWindow() {
+    public MainWindow() throws IOException {
         super("Основное окно");
 
         Container container = getContentPane();
@@ -34,13 +37,19 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(800, 580);
         container.add(topLabel);
+        container.setBackground(Color.WHITE);
+
+        table.setBackground(Color.WHITE);
+        table.setGridColor(Color.PINK);
+
+        label.setIcon(icon);
+        label.setPreferredSize(new Dimension(10, 10));
 
         compose();
         addButtonListeners();
 
         setLocationRelativeTo(null);
         setVisible(true);
-       setResizable(false);
 
         topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
         topLabel.setForeground(Color.PINK);
@@ -61,22 +70,11 @@ public class MainWindow extends JFrame {
         saveButton.setBackground(Color.PINK);
         saveButton.setForeground(Color.WHITE);
 
-        //backgroundImage();
+        label.setIcon(icon);
+        label.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
+        label.setForeground(Color.PINK);
+        label.setVerticalAlignment(JLabel.TOP);
     }
-
-    /*public void backgroundImage() {
-        try {
-            final Image backgroundImage = javax.imageio.ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
-            setContentPane(new JPanel(new BorderLayout()) {
-                @Override
-                public void paintComponent(Graphics g) {
-                    g.drawImage(backgroundImage, 0, 0, null);
-                }
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     private void wrapTable(int countOld, int countNew) {
         tableModel.fireTableDataChanged();
@@ -165,6 +163,7 @@ public class MainWindow extends JFrame {
         JScrollPane tableScrollPane = new JScrollPane(table);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
+                        .addComponent(label)
                         .addComponent(topLabel))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(createFunctionButton)
@@ -178,7 +177,8 @@ public class MainWindow extends JFrame {
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addComponent(label)
                         .addComponent(topLabel))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(createFunctionButton)
@@ -192,16 +192,7 @@ public class MainWindow extends JFrame {
         );
     }
 
-    /*public void paintComponent(Graphics g) {
-            Image im = null;
-            try {
-                im = ImageIO.read(new File("C:\\Users\\drysk\\OneDrive\\Рабочий стол\\Моя папка\\ооп\\Hello.jpg"));
-            } catch (IOException ignored) {
-            }
-            g.drawImage(im, 5, 10, null);
-        }*/
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MainWindow window = new MainWindow();
         window.setVisible(true);
     }
