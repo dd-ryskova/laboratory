@@ -72,7 +72,7 @@ public class OperatingWindow extends JFrame {
         container.add(saveResult);
 
         compose();
-        //addButtonListeners();
+        addButtonListeners();
 
         setLocationRelativeTo(null);
     }
@@ -147,6 +147,195 @@ public class OperatingWindow extends JFrame {
                         .addComponent(openSecond)
                         .addComponent(saveResult)));
         setLocationByPlatform(true);
+    }
+
+    public void wrapTable(TableForMainWindow tableModel, int countOld, int countNew) {
+        tableModel.fireTableDataChanged();
+        for (int i = 0; i < countOld; i++) {
+            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
+            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        }
+        for (int i = 0; i < countNew; i++) {
+            xValues.add(tableModel.getFunction().getX(i));
+            yValues.add(tableModel.getFunction().getY(i));
+        }
+    }
+
+    public void wrapTableForResult(TableForResultWindow tableModel, int countOld, int countNew) {
+        tableModel.fireTableDataChanged();
+        for (int i = 0; i < countOld; i++) {
+            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
+            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        }
+        for (int i = 0; i < countNew; i++) {
+            xValues.add(tableModel.getFunction().getX(i));
+            yValues.add(tableModel.getFunction().getY(i));
+        }
+    }
+
+    private void addButtonListeners() {
+        createTubFirst.addActionListener(event -> {
+                    try {
+                        int countOld = xValues.size();
+                        TabulatedTableWindow.main(factory, tableForFirstFunction::setFunction);
+                        int countNew = tableForFirstFunction.getFunction().getCount();
+                        wrapTable(tableForFirstFunction, countOld, countNew);
+                    } catch (Exception e) {
+                        if (e instanceof NullPointerException) {
+                            e.printStackTrace();
+                        } else
+                            new ExceptionWindow(this, e);
+                    }
+                }
+        );
+
+        createMathFirst.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                MathTableWindow.main(factory, tableForFirstFunction::setFunction);
+                int countNew = tableForFirstFunction.getFunction().getCount();
+                wrapTable(tableForFirstFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        saveFirst.addActionListener(event -> {
+            try {
+                FileWriter.main(tableForFirstFunction.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        openFirst.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                FileReader.main(tableForFirstFunction::setFunction);
+                int countNew = tableForFirstFunction.getFunction().getCount();
+                wrapTable(tableForFirstFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        createTubSecond.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                TabulatedTableWindow.main(factory, tableForSecondFunction::setFunction);
+                int countNew = tableForSecondFunction.getFunction().getCount();
+                wrapTable(tableForSecondFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        createMathSecond.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                MathTableWindow.main(factory, tableForSecondFunction::setFunction);
+                int countNew = tableForSecondFunction.getFunction().getCount();
+                wrapTable(tableForSecondFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        saveSecond.addActionListener(event -> {
+            try {
+                FileWriter.main(tableForSecondFunction.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        openSecond.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                FileReader.main(tableForSecondFunction::setFunction);
+                int countNew = tableForSecondFunction.getFunction().getCount();
+                wrapTable(tableForSecondFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        plus.addActionListener(event -> {
+            try {
+                int countOld = tableForFirstFunction.getFunction().getCount();
+                tableForResult.setFunction(tabulatedFunctionOperationService.sum(tableForFirstFunction.getFunction(), tableForSecondFunction.getFunction()));
+                int countNew = tableForResult.getFunction().getCount();
+                wrapTableForResult(tableForResult, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        subtraction.addActionListener(event -> {
+            try {
+                int countOld = tableForResult.getFunction().getCount();
+                tableForResult.setFunction(tabulatedFunctionOperationService.subtract(tableForFirstFunction.getFunction(), tableForSecondFunction.getFunction()));
+                int countNew = tableForResult.getFunction().getCount();
+                wrapTableForResult(tableForResult, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        multiplication.addActionListener(event -> {
+            try {
+                int countOld = tableForFirstFunction.getFunction().getCount();
+                tableForResult.setFunction(tabulatedFunctionOperationService.multiplication(tableForFirstFunction.getFunction(), tableForSecondFunction.getFunction()));
+                int countNew = tableForResult.getFunction().getCount();
+                wrapTableForResult(tableForResult, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        division.addActionListener(event -> {
+            try {
+                int countOld = tableForFirstFunction.getFunction().getCount();
+                tableForResult.setFunction(tabulatedFunctionOperationService.division(tableForFirstFunction.getFunction(), tableForSecondFunction.getFunction()));
+                int countNew = tableForResult.getFunction().getCount();
+                wrapTableForResult(tableForResult, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
     }
 
     public static void main(String[] args) {
