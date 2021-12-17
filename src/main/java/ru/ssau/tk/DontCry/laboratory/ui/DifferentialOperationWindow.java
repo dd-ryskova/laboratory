@@ -30,6 +30,8 @@ public class DifferentialOperationWindow extends JFrame {
 
     private final JButton saveResult = new JButton("Сохранить");
 
+    private TabulatedFunctionFactory factory;
+
     public DifferentialOperationWindow() {
         setTitle("Нахождение производной");
 
@@ -57,7 +59,7 @@ public class DifferentialOperationWindow extends JFrame {
         designLabel(createResult);
 
         compose();
-        //addButtonListeners();
+        addButtonListeners();
         setLocationRelativeTo(null);
     }
 
@@ -129,6 +131,110 @@ public class DifferentialOperationWindow extends JFrame {
                         .addComponent(saveResult)));
     }
 
+    public void wrapTable(TableForMainWindow tableModel, int countOld, int countNew) {
+        tableModel.fireTableDataChanged();
+        for (int i = 0; i < countOld; i++) {
+            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
+            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        }
+        for (int i = 0; i < countNew; i++) {
+            xValues.add(tableModel.getFunction().getX(i));
+            yValues.add(tableModel.getFunction().getY(i));
+        }
+    }
+
+    public void wrapTableForResult(TableForResultWindow tableModel, int countOld, int countNew) {
+        tableModel.fireTableDataChanged();
+        for (int i = 0; i < countOld; i++) {
+            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
+            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        }
+        for (int i = 0; i < countNew; i++) {
+            xValues.add(tableModel.getFunction().getX(i));
+            yValues.add(tableModel.getFunction().getY(i));
+        }
+    }
+
+    private void addButtonListeners() {
+        createTub.addActionListener(event -> {
+                    try {
+                        int countOld = xValues.size();
+                        TabulatedTableWindow.main(factory, tableForFirstFunction::setFunction);
+                        int countNew = tableForFirstFunction.getFunction().getCount();
+                        wrapTable(tableForFirstFunction, countOld, countNew);
+                    } catch (Exception e) {
+                        if (e instanceof NullPointerException) {
+                            e.printStackTrace();
+                        } else
+                            new ExceptionWindow(this, e);
+                    }
+                }
+        );
+
+        createMath.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                MathTableWindow.main(factory, tableForFirstFunction::setFunction);
+                int countNew = tableForFirstFunction.getFunction().getCount();
+                wrapTable(tableForFirstFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        save.addActionListener(event -> {
+            try {
+                FileWriter.main(tableForFirstFunction.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        saveResult.addActionListener(event -> {
+            try {
+                FileWriter.main(tableForResult.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        input.addActionListener(event -> {
+            try {
+                int countOld = xValues.size();
+                FileReader.main(tableForFirstFunction::setFunction);
+                int countNew = tableForFirstFunction.getFunction().getCount();
+                wrapTable(tableForFirstFunction, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
+        diff.addActionListener(event -> {
+            try {
+                int countOld = tableForFirstFunction.getFunction().getCount();
+                tableForResult.setFunction(diffOperator.derive(tableForFirstFunction.getFunction()));
+                int countNew = tableForResult.getFunction().getCount();
+                wrapTableForResult(tableForResult, countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+    }
 
     public static void main() {
         DifferentialOperationWindow window = new DifferentialOperationWindow();
