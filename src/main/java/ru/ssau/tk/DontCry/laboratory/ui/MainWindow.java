@@ -16,16 +16,14 @@ public class MainWindow extends JFrame {
     private final List<Double> yValues = new ArrayList<>();
     private final TableForOperations tableModel = new TableForOperations();
     private final JTable table = new JTable(tableModel);
-    JLabel topLabel = new JLabel("HelloKitty");
+    private final JLabel topLabel = new JLabel("HelloKitty");
+    private final JLabel label = new JLabel();
 
     private final JButton createFunctionButton = new JButton("Создать табулированную функцию из массивов");
     private final JButton settingsButton = new JButton("Настройки");
     private final JButton createMathFunctionButton = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
-
-    JLabel label = new JLabel();
-    ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
 
     private TabulatedFunctionFactory factory;
 
@@ -38,10 +36,16 @@ public class MainWindow extends JFrame {
         setSize(800, 580);
         container.add(topLabel);
         container.setBackground(Color.WHITE);
+        container.add(createFunctionButton);
+        container.add(settingsButton);
+        container.add(createMathFunctionButton);
+        container.add(openButton);
+        container.add(saveButton);
 
         table.setBackground(Color.WHITE);
         table.setGridColor(Color.PINK);
 
+        ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
         label.setIcon(icon);
         label.setPreferredSize(new Dimension(10, 10));
 

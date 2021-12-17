@@ -22,6 +22,7 @@ public class SettingWindow extends JDialog {
         setSize(new Dimension(300, 110));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(Color.PINK);
+        getContentPane().add(button);
 
         fillMap();
 

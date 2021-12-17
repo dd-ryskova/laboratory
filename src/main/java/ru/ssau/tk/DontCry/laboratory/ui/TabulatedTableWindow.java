@@ -36,6 +36,8 @@ public class TabulatedTableWindow extends JDialog {
         setSize(600, 400);
         container.setBackground(Color.PINK);
         container.add(label);
+        container.add(inputButton);
+        container.add(createFunctionButton);
 
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setBackground(Color.WHITE);
