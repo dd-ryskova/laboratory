@@ -7,12 +7,11 @@ import ru.ssau.tk.DontCry.laboratory.operations.TabulatedFunctionOperationServic
 import javax.swing.*;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperatingWindow extends JFrame {
+public class OperationsWindow extends JFrame {
 
     private final TabulatedFunctionOperationService tabulatedFunctionOperationService = new TabulatedFunctionOperationService();
 
@@ -46,92 +45,64 @@ public class OperatingWindow extends JFrame {
 
     private final JButton saveResult = new JButton("Сохранить");
 
-    public OperatingWindow() {
+    public OperationsWindow() {
         setTitle("Поэлементные операции");
 
         this.factory = new ArrayTabulatedFunctionFactory();
 
-        design();
-        compose();
-        addButtonListeners();
-
-        setLocationRelativeTo(null);
-    }
-
-    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         container.setBackground(Color.WHITE);
         setSize(1000, 580);
 
-        container.add(plus);
-        container.add(division);
-        container.add(multiplication);
-        container.add(subtraction);
+        container.add(designButton(plus));
+        container.add(designButton(division));
+        container.add(designButton(multiplication));
+        container.add(designButton(subtraction));
 
-        container.add(createTubFirst);
-        container.add(createMathFirst);
-        container.add(saveFirst);
-        container.add(openFirst);
+        container.add(designButton(createTubFirst));
+        container.add(designButton(createMathFirst));
+        container.add(designButton(saveFirst));
+        container.add(designButton(openFirst));
 
-        container.add(createTubSecond);
-        container.add(createMathSecond);
-        container.add(saveSecond);
-        container.add(openSecond);
+        container.add(designButton(createTubSecond));
+        container.add(designButton(createMathSecond));
+        container.add(designButton(saveSecond));
+        container.add(designButton(openSecond));
 
-        container.add(saveResult);
+        container.add(designButton(saveResult));
 
-        tableFirst.setBackground(Color.WHITE);
-        tableFirst.setGridColor(Color.PINK);
-        tableSecond.setBackground(Color.WHITE);
-        tableSecond.setGridColor(Color.PINK);
-        tableResult.setBackground(Color.WHITE);
-        tableResult.setGridColor(Color.PINK);
+        designTable(tableFirst);
+        designTable(tableSecond);
+        designTable(tableResult);
 
-        createFirst.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
-        createFirst.setForeground(Color.PINK);
-        createFirst.setVerticalAlignment(JLabel.TOP);
-        createSecond.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
-        createSecond.setForeground(Color.PINK);
-        createSecond.setVerticalAlignment(JLabel.TOP);
-        createResult.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
-        createResult.setForeground(Color.PINK);
-        createResult.setVerticalAlignment(JLabel.TOP);
+        designLabel(createFirst);
+        designLabel(createSecond);
+        designLabel(createResult);
 
-        plus.setBackground(Color.PINK);
-        plus.setForeground(Color.WHITE);
-        division.setBackground(Color.PINK);
-        division.setForeground(Color.WHITE);
+        compose();
+        addButtonListeners();
 
-        multiplication.setBackground(Color.PINK);
-        multiplication.setForeground(Color.WHITE);
+        setLocationRelativeTo(null);
+    }
 
-        subtraction.setBackground(Color.PINK);
-        subtraction.setForeground(Color.WHITE);
+    public Component designButton(JButton button) {
+        button.setBackground(Color.PINK);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        return button;
+    }
 
-        createTubFirst.setBackground(Color.PINK);
-        createMathFirst.setBackground(Color.PINK);
-        saveFirst.setBackground(Color.PINK);
-        openFirst.setBackground(Color.PINK);
+    public void designLabel(JLabel label) {
+        label.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 15));
+        label.setForeground(Color.PINK);
+        label.setVerticalAlignment(JLabel.TOP);
+    }
 
-        createTubFirst.setForeground(Color.WHITE);
-        createMathFirst.setForeground(Color.WHITE);
-        saveFirst.setForeground(Color.WHITE);
-        openFirst.setForeground(Color.WHITE);
-
-        createTubSecond.setBackground(Color.PINK);
-        createMathSecond.setBackground(Color.PINK);
-        saveSecond.setBackground(Color.PINK);
-        openSecond.setBackground(Color.PINK);
-
-        createTubSecond.setForeground(Color.WHITE);
-        createMathSecond.setForeground(Color.WHITE);
-        saveSecond.setForeground(Color.WHITE);
-        openSecond.setForeground(Color.WHITE);
-
-        saveResult.setBackground(Color.PINK);
-        saveResult.setForeground(Color.WHITE);
+    public void designTable(JTable table) {
+        table.setBackground(Color.WHITE);
+        table.setGridColor(Color.PINK);
     }
 
     void compose() {
@@ -396,7 +367,7 @@ public class OperatingWindow extends JFrame {
     }
 
     public static void main() throws IOException {
-        OperatingWindow window = new OperatingWindow();
+        OperationsWindow window = new OperationsWindow();
         window.setResizable(false);
         window.setVisible(true);
     }

@@ -162,7 +162,7 @@ public class MainWindow extends JFrame {
 
         operationButton.addActionListener(event -> {
             try {
-                OperatingWindow.main();
+                OperationsWindow.main();
             } catch (Exception e) {
                 if (e instanceof NullPointerException) {
                     e.printStackTrace();
