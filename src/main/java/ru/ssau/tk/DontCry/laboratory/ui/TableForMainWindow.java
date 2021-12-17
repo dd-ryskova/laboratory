@@ -4,7 +4,7 @@ import ru.ssau.tk.DontCry.laboratory.functions.TabulatedFunction;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TableForOperations extends AbstractTableModel {
+public class TableForMainWindow extends AbstractTableModel {
 
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int X_COLUMN_NUMBER = 1;
@@ -12,7 +12,7 @@ public class TableForOperations extends AbstractTableModel {
     private static final long serialVersionUID = 5627188898700040102L;
     private TabulatedFunction function;
 
-    public TableForOperations() {
+    public TableForMainWindow() {
     }
 
     @Override

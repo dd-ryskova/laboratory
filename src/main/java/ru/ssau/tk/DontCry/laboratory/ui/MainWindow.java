@@ -2,7 +2,6 @@ package ru.ssau.tk.DontCry.laboratory.ui;
 
 import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -14,7 +13,7 @@ public class MainWindow extends JFrame {
 
     private final List<Double> xValues = new ArrayList<>();
     private final List<Double> yValues = new ArrayList<>();
-    private final TableForOperations tableModel = new TableForOperations();
+    private final TableForMainWindow tableModel = new TableForMainWindow();
     private final JTable table = new JTable(tableModel);
     private final JLabel topLabel = new JLabel("HelloKitty");
     private final JLabel label = new JLabel();
@@ -73,11 +72,6 @@ public class MainWindow extends JFrame {
 
         saveButton.setBackground(Color.PINK);
         saveButton.setForeground(Color.WHITE);
-
-        label.setIcon(icon);
-        label.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
-        label.setForeground(Color.PINK);
-        label.setVerticalAlignment(JLabel.TOP);
     }
 
     private void wrapTable(int countOld, int countNew) {
