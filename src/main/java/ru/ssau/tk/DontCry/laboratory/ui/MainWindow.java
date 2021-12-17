@@ -21,16 +21,38 @@ public class MainWindow extends JFrame {
     private final JButton createFunctionButton = new JButton("Создать табулированную функцию из массивов");
     private final JButton settingsButton = new JButton("Настройки");
     private final JButton createMathFunctionButton = new JButton("Создать табулированную функцию с помощью другой функции");
+
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
     private final JButton operationButton = new JButton("Операции");
+    private final JButton differential = new JButton("Производная");
 
     private TabulatedFunctionFactory factory;
 
     public MainWindow() throws IOException {
         super("Основное окно");
 
-        design();
+        Container container = getContentPane();
+        container.setLayout(new FlowLayout());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(800, 580);
+        container.add(topLabel);
+        container.setBackground(Color.WHITE);
+        container.add(designButton(createFunctionButton));
+        container.add(designButton(settingsButton));
+        container.add(designButton(createMathFunctionButton));
+        container.add(designButton(openButton));
+        container.add(designButton(saveButton));
+        container.add(designButton(operationButton));
+        container.add(designButton(differential));
+
+        ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
+        label.setIcon(icon);
+        label.setPreferredSize(new Dimension(10, 10));
+
+        designTable(table);
+        designLabel(topLabel);
+
         compose();
         addButtonListeners();
 
@@ -38,48 +60,23 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-    private void design() throws IOException {
-        Container container = getContentPane();
-        container.setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(800, 580);
-        container.add(topLabel);
-        container.setBackground(Color.WHITE);
-        container.add(createFunctionButton);
-        container.add(settingsButton);
-        container.add(createMathFunctionButton);
-        container.add(openButton);
-        container.add(saveButton);
-        container.add(operationButton);
 
+    public Component designButton(JButton button) {
+        button.setBackground(Color.PINK);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        return button;
+    }
+
+    public void designLabel(JLabel label) {
+        label.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
+        label.setForeground(Color.PINK);
+        label.setVerticalAlignment(JLabel.TOP);
+    }
+
+    public void designTable(JTable table) {
         table.setBackground(Color.WHITE);
         table.setGridColor(Color.PINK);
-
-        ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("1.jpg"))));
-        label.setIcon(icon);
-        label.setPreferredSize(new Dimension(10, 10));
-
-        topLabel.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
-        topLabel.setForeground(Color.PINK);
-        topLabel.setVerticalAlignment(JLabel.TOP);
-
-        createFunctionButton.setBackground(Color.PINK);
-        createFunctionButton.setForeground(Color.WHITE);
-
-        settingsButton.setBackground(Color.PINK);
-        settingsButton.setForeground(Color.WHITE);
-
-        createMathFunctionButton.setBackground(Color.PINK);
-        createMathFunctionButton.setForeground(Color.WHITE);
-
-        openButton.setBackground(Color.PINK);
-        openButton.setForeground(Color.WHITE);
-
-        saveButton.setBackground(Color.PINK);
-        saveButton.setForeground(Color.WHITE);
-
-        operationButton.setBackground(Color.PINK);
-        operationButton.setForeground(Color.WHITE);
     }
 
     private void wrapTable(int countOld, int countNew) {
@@ -170,6 +167,17 @@ public class MainWindow extends JFrame {
                     new ExceptionWindow(this, e);
             }
         });
+
+        differential.addActionListener(event -> {
+            try {
+                DifferentialOperationWindow.main();
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
     }
 
     private void compose() {
@@ -187,6 +195,7 @@ public class MainWindow extends JFrame {
                         .addComponent(createMathFunctionButton))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(operationButton)
+                        .addComponent(differential)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -203,6 +212,7 @@ public class MainWindow extends JFrame {
                         .addComponent(createMathFunctionButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(operationButton)
+                        .addComponent(differential)
                         .addComponent(settingsButton)
                         .addComponent(openButton)
                         .addComponent(saveButton))

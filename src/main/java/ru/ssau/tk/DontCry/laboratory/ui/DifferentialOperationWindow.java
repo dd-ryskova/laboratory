@@ -16,13 +16,13 @@ public class DifferentialOperationWindow extends JFrame {
     private final TableForMainWindow tableForFirstFunction = new TableForMainWindow();
     private final TableForResultWindow tableForResult = new TableForResultWindow();
     private final JLabel create = new JLabel("Создать функцию с помощью:");
+    private final JLabel createResult = new JLabel("Ваш результат:");
     private final JTable tableFirst = new JTable(tableForFirstFunction);
     private final JTable tableResult = new JTable(tableForResult);
     private final List<Double> xValues = new ArrayList<>();
     private final List<Double> yValues = new ArrayList<>();
 
-    private final JButton diff = new JButton();
-
+    private final JButton diff = new JButton("Найти производную");
     private final JButton createTub = new JButton("массива");
     private final JButton createMath = new JButton("функции");
     private final JButton save = new JButton("Сохранить");
@@ -54,8 +54,9 @@ public class DifferentialOperationWindow extends JFrame {
         designTable(tableResult);
 
         designLabel(create);
+        designLabel(createResult);
 
-        //compose()
+        compose();
         //addButtonListeners();
         setLocationRelativeTo(null);
     }
@@ -78,7 +79,58 @@ public class DifferentialOperationWindow extends JFrame {
         table.setGridColor(Color.PINK);
     }
 
-    public static void main(String[] args) {
+    void compose() {
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        JScrollPane firstTableScrollPane = new JScrollPane(tableFirst);
+        JScrollPane resultTableScrollPane = new JScrollPane(tableResult);
+
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(create)
+                        .addGap(298)
+                        .addComponent(createResult))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(createTub)
+                        .addComponent(createMath)
+                        .addGap(325)
+                        .addComponent(diff))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(firstTableScrollPane)
+                        .addGap(40)
+                        .addComponent(resultTableScrollPane))
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(125)
+                        .addComponent(save)
+                        .addComponent(input)
+                        .addGap(360)
+                        .addComponent(saveResult)));
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(create)
+                        .addComponent(createResult))
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(createTub)
+                        .addComponent(createMath)
+                        .addComponent(diff))
+                .addGap(20)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(firstTableScrollPane)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(120))
+                        .addComponent(resultTableScrollPane))
+                .addGap(30)
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(save)
+                        .addComponent(input)
+                        .addComponent(saveResult)));
+    }
+
+
+    public static void main() {
         DifferentialOperationWindow window = new DifferentialOperationWindow();
         window.setVisible(true);
         window.setResizable(false);

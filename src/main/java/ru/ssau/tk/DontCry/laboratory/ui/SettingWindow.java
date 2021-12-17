@@ -20,16 +20,6 @@ public class SettingWindow extends JDialog {
 
         this.factory = factory;
 
-        design();
-        fillMap();
-        compose();
-        addButtonListeners();
-
-        setModal(true);
-        setLocationRelativeTo(null);
-    }
-
-    private void design() {
         setSize(new Dimension(300, 110));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(Color.PINK);
@@ -42,6 +32,13 @@ public class SettingWindow extends JDialog {
 
         functionComboBox.setForeground(Color.PINK);
         functionComboBox.setBackground(Color.WHITE);
+
+        fillMap();
+        compose();
+        addButtonListeners();
+
+        setModal(true);
+        setLocationRelativeTo(null);
     }
 
     private void fillMap() {
