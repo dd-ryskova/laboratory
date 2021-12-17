@@ -37,7 +37,7 @@ public class DifferentialOperationWindow extends JFrame {
 
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         container.setBackground(Color.WHITE);
         setSize(1000, 580);
 
