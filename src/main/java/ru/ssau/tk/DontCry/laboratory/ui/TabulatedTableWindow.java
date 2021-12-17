@@ -31,7 +31,6 @@ public class TabulatedTableWindow extends JDialog {
     public TabulatedTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
         setTitle("Создание функции из массива");
-
         design();
         compose();
         addButtonListeners(callback);
@@ -99,7 +98,7 @@ public class TabulatedTableWindow extends JDialog {
                     yValues.add(0.);
                     tableModel.fireTableDataChanged();
                 }
-                if (tableModel.getRowCount() > 0) {
+                if (tableModel.getRowCount() > 1) {
                     createFunctionButton.setEnabled(true);
                 } else {
                     throw new DifferentLengthOfArraysException();
