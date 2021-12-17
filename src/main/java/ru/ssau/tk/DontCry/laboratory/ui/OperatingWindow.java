@@ -1,10 +1,12 @@
 package ru.ssau.tk.DontCry.laboratory.ui;
 
+import ru.ssau.tk.DontCry.laboratory.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.DontCry.laboratory.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.DontCry.laboratory.operations.TabulatedFunctionOperationService;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +42,37 @@ public class OperatingWindow extends JFrame {
     private final JButton saveResult = new JButton("Сохранить");
 
     public OperatingWindow() {
-    }
+        setTitle("Поэлементные операции");
 
+        this.factory = new ArrayTabulatedFunctionFactory();
+
+        Container container = getContentPane();
+        container.setLayout(new FlowLayout());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(1000, 580);
+
+        container.add(plus);
+        container.add(division);
+        container.add(multiplication);
+        container.add(subtraction);
+
+        container.add(createTubFirst);
+        container.add(createMathFirst);
+        container.add(saveFirst);
+        container.add(openFirst);
+
+        container.add(createTubSecond);
+        container.add(createMathSecond);
+        container.add(saveSecond);
+        container.add(openSecond);
+
+        container.add(saveResult);
+
+        //compose();
+        //addButtonListeners();
+
+        setLocationRelativeTo(null);
+    }
 
     public static void main(String[] args) {
         OperatingWindow window = new OperatingWindow();
