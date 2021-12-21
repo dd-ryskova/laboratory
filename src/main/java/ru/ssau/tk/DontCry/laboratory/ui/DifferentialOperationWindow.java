@@ -13,8 +13,8 @@ public class DifferentialOperationWindow extends JFrame {
 
     private final TabulatedDifferentialOperator diffOperator = new TabulatedDifferentialOperator();
 
-    private final TableForMainWindow tableForFirstFunction = new TableForMainWindow();
-    private final TableForResultWindow tableForResult = new TableForResultWindow();
+    private final TableForMain tableForFirstFunction = new TableForMain();
+    private final TableForResult tableForResult = new TableForResult();
     private final JLabel create = new JLabel("Создать функцию с помощью:");
     private final JLabel createResult = new JLabel("Ваш результат:");
     private final JTable tableFirst = new JTable(tableForFirstFunction);
@@ -131,7 +131,7 @@ public class DifferentialOperationWindow extends JFrame {
                         .addComponent(saveResult)));
     }
 
-    public void wrapTable(TableForMainWindow tableModel, int countOld, int countNew) {
+    public void wrapTable(TableForMain tableModel, int countOld, int countNew) {
         tableModel.fireTableDataChanged();
         for (int i = 0; i < countOld; i++) {
             if (xValues.size() != 0) xValues.remove(countOld - i - 1);
@@ -143,7 +143,7 @@ public class DifferentialOperationWindow extends JFrame {
         }
     }
 
-    public void wrapTableForResult(TableForResultWindow tableModel, int countOld, int countNew) {
+    public void wrapTableForResult(TableForResult tableModel, int countOld, int countNew) {
         tableModel.fireTableDataChanged();
         for (int i = 0; i < countOld; i++) {
             if (xValues.size() != 0) xValues.remove(countOld - i - 1);

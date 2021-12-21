@@ -15,9 +15,9 @@ public class OperationsWindow extends JFrame {
 
     private final TabulatedFunctionOperationService tabulatedFunctionOperationService = new TabulatedFunctionOperationService();
 
-    private final TableForMainWindow tableForFirstFunction = new TableForMainWindow();
-    private final TableForMainWindow tableForSecondFunction = new TableForMainWindow();
-    private final TableForResultWindow tableForResult = new TableForResultWindow();
+    private final TableForMain tableForFirstFunction = new TableForMain();
+    private final TableForMain tableForSecondFunction = new TableForMain();
+    private final TableForResult tableForResult = new TableForResult();
     private final JTable tableFirst = new JTable(tableForFirstFunction);
     private final JTable tableSecond = new JTable(tableForSecondFunction);
     private final JTable tableResult = new JTable(tableForResult);
@@ -105,79 +105,7 @@ public class OperationsWindow extends JFrame {
         table.setGridColor(Color.PINK);
     }
 
-    void compose() {
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-        JScrollPane firstTableScrollPane = new JScrollPane(tableFirst);
-        JScrollPane secondTableScrollPane = new JScrollPane(tableSecond);
-        JScrollPane resultTableScrollPane = new JScrollPane(tableResult);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(createFirst)
-                        .addGap(76)
-                        .addComponent(createSecond)
-                        .addGap(75)
-                        .addComponent(createResult))
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(createTubFirst)
-                        .addComponent(createMathFirst)
-                        .addGap(165)
-                        .addComponent(createTubSecond)
-                        .addComponent(createMathSecond))
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(firstTableScrollPane)
-                        .addGroup(layout.createParallelGroup()
-                                .addComponent(plus)
-                                .addComponent(multiplication)
-                                .addComponent(subtraction)
-                                .addComponent(division))
-                        .addComponent(secondTableScrollPane)
-                        .addGap(50)
-                        .addComponent(resultTableScrollPane))
-                .addGroup(layout.createSequentialGroup()
-                        .addGap(50)
-                        .addComponent(saveFirst)
-                        .addComponent(openFirst)
-                        .addGap(153)
-                        .addComponent(saveSecond)
-                        .addComponent(openSecond)
-                        .addGap(188)
-                        .addComponent(saveResult)));
-
-        layout.setVerticalGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup()
-                        .addComponent(createFirst)
-                        .addComponent(createSecond)
-                        .addComponent(createResult))
-                .addGroup(layout.createParallelGroup()
-                        .addComponent(createTubFirst)
-                        .addComponent(createMathFirst)
-                        .addGap(50)
-                        .addComponent(createTubSecond)
-                        .addComponent(createMathSecond))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(firstTableScrollPane)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(120)
-                                .addComponent(plus)
-                                .addComponent(multiplication)
-                                .addComponent(subtraction)
-                                .addComponent(division)
-                                .addGap(110))
-                        .addComponent(secondTableScrollPane)
-                        .addComponent(resultTableScrollPane))
-                .addGroup(layout.createParallelGroup()
-                        .addComponent(saveFirst)
-                        .addComponent(openFirst)
-                        .addComponent(saveSecond)
-                        .addComponent(openSecond)
-                        .addComponent(saveResult)));
-        setLocationByPlatform(true);
-    }
-
-    public void wrapTable(TableForMainWindow tableModel, int countOld, int countNew) {
+    public void wrapTable(TableForMain tableModel, int countOld, int countNew) {
         tableModel.fireTableDataChanged();
         for (int i = 0; i < countOld; i++) {
             if (xValues.size() != 0) xValues.remove(countOld - i - 1);
@@ -189,7 +117,7 @@ public class OperationsWindow extends JFrame {
         }
     }
 
-    public void wrapTableForResult(TableForResultWindow tableModel, int countOld, int countNew) {
+    public void wrapTableForResult(TableForResult tableModel, int countOld, int countNew) {
         tableModel.fireTableDataChanged();
         for (int i = 0; i < countOld; i++) {
             if (xValues.size() != 0) xValues.remove(countOld - i - 1);
@@ -364,6 +292,78 @@ public class OperationsWindow extends JFrame {
                     new ExceptionWindow(this, e);
             }
         });
+    }
+
+    void compose() {
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        JScrollPane firstTableScrollPane = new JScrollPane(tableFirst);
+        JScrollPane secondTableScrollPane = new JScrollPane(tableSecond);
+        JScrollPane resultTableScrollPane = new JScrollPane(tableResult);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(createFirst)
+                        .addGap(76)
+                        .addComponent(createSecond)
+                        .addGap(75)
+                        .addComponent(createResult))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(createTubFirst)
+                        .addComponent(createMathFirst)
+                        .addGap(165)
+                        .addComponent(createTubSecond)
+                        .addComponent(createMathSecond))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(firstTableScrollPane)
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(plus)
+                                .addComponent(multiplication)
+                                .addComponent(subtraction)
+                                .addComponent(division))
+                        .addComponent(secondTableScrollPane)
+                        .addGap(50)
+                        .addComponent(resultTableScrollPane))
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(50)
+                        .addComponent(saveFirst)
+                        .addComponent(openFirst)
+                        .addGap(153)
+                        .addComponent(saveSecond)
+                        .addComponent(openSecond)
+                        .addGap(188)
+                        .addComponent(saveResult)));
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(createFirst)
+                        .addComponent(createSecond)
+                        .addComponent(createResult))
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(createTubFirst)
+                        .addComponent(createMathFirst)
+                        .addGap(50)
+                        .addComponent(createTubSecond)
+                        .addComponent(createMathSecond))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(firstTableScrollPane)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(120)
+                                .addComponent(plus)
+                                .addComponent(multiplication)
+                                .addComponent(subtraction)
+                                .addComponent(division)
+                                .addGap(110))
+                        .addComponent(secondTableScrollPane)
+                        .addComponent(resultTableScrollPane))
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(saveFirst)
+                        .addComponent(openFirst)
+                        .addComponent(saveSecond)
+                        .addComponent(openSecond)
+                        .addComponent(saveResult)));
+        setLocationByPlatform(true);
     }
 
     public static void main() throws IOException {

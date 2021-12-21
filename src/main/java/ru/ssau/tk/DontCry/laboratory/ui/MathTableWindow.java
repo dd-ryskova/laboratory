@@ -14,12 +14,15 @@ public class MathTableWindow extends JDialog {
 
     private final JComboBox<String> functionComboBox = new JComboBox<>();
     private final JButton buttonCreateFunction = new JButton("Создать функцию");
+
     private final JLabel fromLabel = new JLabel("От:");
     private final JLabel toLabel = new JLabel("До:");
     private final JLabel countLabel = new JLabel("Количество точек разбиения:");
+
     private final JTextField fromField = new JTextField();
     private final JTextField toField = new JTextField();
     private final JTextField countField = new JTextField();
+
     private final Map<String, MathFunction> nameFunctionMap = new HashMap<>();
     public static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     protected TabulatedFunction function;
@@ -28,16 +31,6 @@ public class MathTableWindow extends JDialog {
         super();
         setTitle("Создание функцию c помощью другой функции");
 
-        design();
-        compose();
-        addButtonListeners(callback);
-
-        setModal(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -63,6 +56,30 @@ public class MathTableWindow extends JDialog {
 
         functionComboBox.setForeground(Color.PINK);
         functionComboBox.setBackground(Color.WHITE);
+
+        compose();
+        addButtonListeners(callback);
+
+        setModal(true);
+        setLocationRelativeTo(null);
+    }
+
+    private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
+        buttonCreateFunction.addActionListener(evt -> {
+            try {
+                String func = (String) functionComboBox.getSelectedItem();
+                MathFunction selectedFunction = nameFunctionMap.get(func);
+                double from = Double.parseDouble(fromField.getText());
+                double to = Double.parseDouble(toField.getText());
+                int count = Integer.parseInt(countField.getText());
+                function = MathTableWindow.factory.create(selectedFunction, from, to, count);
+                callback.accept(function);
+                setVisible(true);
+                this.dispose();
+            } catch (Exception e) {
+                new ExceptionWindow(this, e);
+            }
+        });
     }
 
     private void compose() {
@@ -96,24 +113,6 @@ public class MathTableWindow extends JDialog {
                 .addComponent(functionComboBox)
                 .addComponent(buttonCreateFunction)
         );
-    }
-
-    private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
-        buttonCreateFunction.addActionListener(evt -> {
-            try {
-                String func = (String) functionComboBox.getSelectedItem();
-                MathFunction selectedFunction = nameFunctionMap.get(func);
-                double from = Double.parseDouble(fromField.getText());
-                double to = Double.parseDouble(toField.getText());
-                int count = Integer.parseInt(countField.getText());
-                function = MathTableWindow.factory.create(selectedFunction, from, to, count);
-                callback.accept(function);
-                setVisible(true);
-                this.dispose();
-            } catch (Exception e) {
-                new ExceptionWindow(this, e);
-            }
-        });
     }
 
     public void allFunctions() {

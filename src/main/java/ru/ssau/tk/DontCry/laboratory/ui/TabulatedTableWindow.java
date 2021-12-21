@@ -31,15 +31,7 @@ public class TabulatedTableWindow extends JDialog {
     public TabulatedTableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
         setTitle("Создание функции из массива");
-        design();
-        compose();
-        addButtonListeners(callback);
 
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    private void design() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -60,31 +52,20 @@ public class TabulatedTableWindow extends JDialog {
 
         createFunctionButton.setBackground(Color.WHITE);
         createFunctionButton.setForeground(Color.PINK);
+
+        compose();
+        addButtonListeners(callback);
+
+        setModal(true);
+        setLocationRelativeTo(null);
     }
 
-    void compose() {
-        Container container = getContentPane();
-        GroupLayout layout = new GroupLayout(container);
-        container.setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-        JScrollPane tableScrollPane = new JScrollPane(table);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(label)
-                        .addComponent(countField)
-                        .addComponent(inputButton))
-                .addComponent(tableScrollPane)
-                .addComponent(createFunctionButton)
-        );
-        layout.setVerticalGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(label)
-                        .addComponent(countField)
-                        .addComponent(inputButton))
-                .addComponent(tableScrollPane)
-                .addComponent(createFunctionButton)
-        );
+    public void clearingTheTable(int count) {
+        for (int i = 0; i < count; ++i) {
+            xValues.remove(count - (i + 1));
+            yValues.remove(count - (i + 1));
+            tableModel.fireTableDataChanged();
+        }
     }
 
     private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
@@ -131,12 +112,29 @@ public class TabulatedTableWindow extends JDialog {
         });
     }
 
-    public void clearingTheTable(int count) {
-        for (int i = 0; i < count; ++i) {
-            xValues.remove(count - (i + 1));
-            yValues.remove(count - (i + 1));
-            tableModel.fireTableDataChanged();
-        }
+    void compose() {
+        Container container = getContentPane();
+        GroupLayout layout = new GroupLayout(container);
+        container.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        JScrollPane tableScrollPane = new JScrollPane(table);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addComponent(countField)
+                        .addComponent(inputButton))
+                .addComponent(tableScrollPane)
+                .addComponent(createFunctionButton)
+        );
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(label)
+                        .addComponent(countField)
+                        .addComponent(inputButton))
+                .addComponent(tableScrollPane)
+                .addComponent(createFunctionButton)
+        );
     }
 
     public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) throws IOException {

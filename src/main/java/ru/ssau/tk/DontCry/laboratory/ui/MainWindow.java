@@ -13,7 +13,7 @@ public class MainWindow extends JFrame {
 
     private final List<Double> xValues = new ArrayList<>();
     private final List<Double> yValues = new ArrayList<>();
-    private final TableForMainWindow tableModel = new TableForMainWindow();
+    private final TableForMain tableModel = new TableForMain();
     private final JTable table = new JTable(tableModel);
     private final JLabel topLabel = new JLabel("HelloKitty");
     private final JLabel label = new JLabel();
@@ -57,7 +57,6 @@ public class MainWindow extends JFrame {
         addButtonListeners();
 
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
 
@@ -81,11 +80,11 @@ public class MainWindow extends JFrame {
 
     private void wrapTable(int countOld, int countNew) {
         tableModel.fireTableDataChanged();
-        for (int i = 0; i < countOld; i++) {
-            if (xValues.size() != 0) xValues.remove(countOld - i - 1);
-            if (yValues.size() != 0) yValues.remove(countOld - i - 1);
+        for (int i = 0; i <= countOld; ++i) {
+            if (xValues.size() != 0) xValues.remove(countOld - i);
+            if (yValues.size() != 0) yValues.remove(countOld - i);
         }
-        for (int i = 0; i < countNew; i++) {
+        for (int i = 0; i < countNew; ++i) {
             xValues.add(tableModel.getFunction().getX(i));
             yValues.add(tableModel.getFunction().getY(i));
         }
