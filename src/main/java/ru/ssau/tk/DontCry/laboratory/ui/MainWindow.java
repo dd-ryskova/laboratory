@@ -92,19 +92,18 @@ public class MainWindow extends JFrame {
 
     private void addButtonListeners() {
         createFunctionButton.addActionListener(event -> {
-                    try {
-                        int countOld = xValues.size();
-                        TabulatedTableWindow.main(factory, tableModel::setFunction);
-                        int countNew = tableModel.getFunction().getCount();
-                        wrapTable(countOld, countNew);
-                    } catch (Exception e) {
-                        if (e instanceof NullPointerException) {
-                            e.printStackTrace();
-                        } else
-                            new ExceptionWindow(this, e);
-                    }
-                }
-        );
+            try {
+                int countOld = xValues.size();
+                TabulatedTableWindow.main(factory, tableModel::setFunction);
+                int countNew = tableModel.getFunction().getCount();
+                wrapTable(countOld, countNew);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
 
         settingsButton.addActionListener(event -> {
             try {

@@ -237,6 +237,17 @@ public class OperationsWindow extends JFrame {
             }
         });
 
+        saveResult.addActionListener(event ->{
+            try {
+                FileWriter.main(tableForResult.getFunction());
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ExceptionWindow(this, e);
+            }
+        });
+
         plus.addActionListener(event -> {
             try {
                 int countOld = tableForFirstFunction.getFunction().getCount();
