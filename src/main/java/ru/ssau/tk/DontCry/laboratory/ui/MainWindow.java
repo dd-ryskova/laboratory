@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
 
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(800, 580);
         container.add(topLabel);
         container.setBackground(Color.WHITE);
